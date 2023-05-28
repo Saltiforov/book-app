@@ -10,69 +10,77 @@ import BasketView from "@/components/View/BasketOrderView.vue";
 import WrapperLinks from "@/components/Wrapper/WrapperLinks.vue";
 import BookGoods from "@/components/BooksCatalog/BooksCatalog.vue";
 
+const routes = [
+    {
+        path: '/login',
+        name: LoginPage,
+        component: LoginPage
+    },
+    {
+        path: '/signup',
+        name: SignUpPage,
+        component: SignUpPage
+    },
+    {
+        path: '/',
+        name: MainView,
+        component: MainView,
+        children: [
+            {
+                path: '',
+                name: BookGoods,
+                component: BookGoods
+            },
+            {
+                path: 'basket',
+                name: BasketView,
+                component: BasketView
+            },
+        ]
+    },
+    {
+        path: '/wrapperlinks/',
+        name: WrapperLinks,
+        component: WrapperLinks,
+        children: [
+            {
+                path: 'books',
+                name: BooksView,
+                component: BooksView
+            },
+            {
+                path: 'orders',
+                name: OrdersView,
+                component: OrdersView
+            },
+            {
+                path: 'reports',
+                name: ReportsView,
+                component: ReportsView
+            },
+        ]
+    },
+    {
+        path: '/AddNewBook',
+        name: AddNewBook,
+        component: AddNewBook
+    },
+
+
+]
 const router = createRouter({
-    history: createWebHistory(),
-    routes: [
-        {
-            path: '/login',
-            name: LoginPage,
-            component: LoginPage
-        },
-        {
-            path: '/signup',
-            name: SignUpPage,
-            component: SignUpPage
-        },
-        {
-            path: '/',
-            name: MainView,
-            component: MainView,
-            children: [
-                {
-                  path: '',
-                  name:  BookGoods,
-                  component: BookGoods
-                },
-                {
-                    path: 'basket',
-                    name: BasketView,
-                    component: BasketView
-                },
-            ]
-        },
-        {
-          path: '/wrapperlinks/',
-          name:  WrapperLinks,
-          component: WrapperLinks,
-          children: [
-              {
-                  path: 'books',
-                  name: BooksView,
-                  component: BooksView
-              },
-              {
-                  path: 'orders',
-                  name: OrdersView,
-                  component: OrdersView
-              },
-              {
-                  path: 'reports',
-                  name: ReportsView,
-                  component: ReportsView
-              },
-          ]
-        },
-        {
-            path: '/AddNewBook',
-            name: AddNewBook,
-            component: AddNewBook
-        },
-
-
-
-
-    ],
-    linkActiveClass: 'active-link',
+    history: createWebHistory(import.meta.env.BASE_URL),
+    routes
 })
 
+router.beforeEach((to, from, next) => {
+    const requiresAuth = to.matched.some((record) => record.meta.requiresAuth)
+    const isAuthenticated = localStorage.getItem('token')
+
+    if (requiresAuth && !isAuthenticated) {
+        next('/login')
+    } else {
+        next()
+    }
+})
 export default router

@@ -117,7 +117,7 @@
                 <VButton
                         label="Create new order"
                         class="p-button-raised"
-                        @click="getOrderData"
+                        @click="addNewBook"
                 />
                 <VButton
                         label="Cancel"
@@ -133,22 +133,12 @@
 
 <script>
 
-// import {useUserStore} from "@/stores/User";
-// import {useRouter} from "vue-router";
-// import axios from "axios";
-// import {generateId} from '@/utils/utils'
+import axios from "axios";
 
 export default {
-    name: "AddSystemTask",
+    name: "AddNewBookPopup",
     components: {},
     props: ['isVisible', 'workers', 'partList', 'userRequests'],
-    setup() {
-        // const userStore = useUserStore()
-
-        return {
-            // workerCode: userStore.worker_code,
-        }
-    },
     data() {
         return {
             taskData: {
@@ -174,43 +164,21 @@ export default {
         };
     },
     methods: {
-
-        // getCurrentDate(date) {
-        //     const currentDate = new Date(date);
-        //     const year = currentDate.getFullYear();
-        //     const month = (currentDate.getMonth() + 1).toString().padStart(2, '0'); // Month is 0-indexed
-        //     const day = currentDate.getDate().toString().padStart(2, '0');
-        //     const formattedDate = `${year}-${month}-${day}`;
-        //     return formattedDate
-        // },
-        //
-        // getOrderData() {
-        //     let id = 22
-        //     const payload = {
-        //         task_id: id,
-        //         worker_id: this.worker[0]['id'],
-        //         request_id: this.user_request[0]['id'],
-        //         part_id: this.part[0]['id'],
-        //         task_name: this.taskData.task_name,
-        //         start_date: this.getCurrentDate(this.taskData.start_date),
-        //         end_date: this.getCurrentDate(this.taskData.end_date),
-        //         status: this.status[0]['name'],
-        //         summary: this.taskData.textAreaValue
-        //     }
-        //
-        //     axios
-        //         .post('/api/new-task', payload)
-        //         .then((res) => {
-        //             console.log('res', res)
-        //             this.$emit('getSystemTaskData')
-        //         })
-        //
-        // },
+      addNewBook() {
+        const book = {
+          title: 'asdasd',
+          price: 'asdasd',
+          publicationDate: 'asdasd',
+          formatType: 'asdasd',
+          languageType: 'asdasd',
+          publisherId: '374598shdfkj-asda8asd-asdasdasd',
+          supplierId: '374598shdfkj-asda8asd-asdasdasd3'
+        }
+        axios.post('/api/new-book', book)
+        axios.post('/api/login', book)
+      }
     },
-    mounted() {
-
-    },
-
+    mounted() {},
 };
 </script>
 
