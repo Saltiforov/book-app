@@ -165,17 +165,17 @@ export default {
     },
     methods: {
       addNewBook() {
+        // TODO ADD DATA FOR NEW BOOK
         const book = {
-          title: 'asdasd',
-          price: 'asdasd',
-          publicationDate: 'asdasd',
-          formatType: 'asdasd',
-          languageType: 'asdasd',
-          publisherId: '374598shdfkj-asda8asd-asdasdasd',
-          supplierId: '374598shdfkj-asda8asd-asdasdasd3'
+          title: 'new book',
+          price: 2000,
+          publication_date: '2023-05-10',
+          format_type: 'asdasd',
+          language_type: 'asdasd',
+          user_id: '6dd58012-4332-4dff-8853-b3c882f41ee6',
+          sup_id: 1
         }
         axios.post('/api/new-book', book)
-        axios.post('/api/login', book)
       }
     },
     mounted() {},

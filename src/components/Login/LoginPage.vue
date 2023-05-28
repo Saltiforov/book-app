@@ -48,6 +48,7 @@
 
 import Password from 'primevue/password';
 import InputText from 'primevue/inputtext';
+import axios from "axios";
 // import { useUserStore } from '@/stores/User'
 // import {useRouter} from "vue-router";
 
@@ -71,32 +72,14 @@ export default {
         }
 
     },
-    methods: {},
-    // setup() {
-    //     const userStore = useUserStore()
-    //     const router = useRouter()
-    //
-    //     function handleLogin() {
-    //         const payload = {
-    //             user_name: 'worker1',
-    //             password: '123123123123'
-    //         }
-    //         userStore.login(payload).then(() => {
-    //             router.push('/')
-    //         })
-    //     }
-    //
-    //     function logout() {
-    //         userStore.logout()
-    //     }
-    //
-    //     return {
-    //         handleLogin,
-    //         logout,
-    //
-    //     }
-    //
-    // }
+    methods: {
+      handleLogin() {
+        axios.post('/api/login', {
+          user_name: this.formData.userName,
+          password: this.formData.password,
+        })
+      }
+    },
 }
 </script>
 

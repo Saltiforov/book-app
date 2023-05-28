@@ -75,6 +75,7 @@ import Password from 'primevue/password';
 import InputText from 'primevue/inputtext';
 import Checkbox from 'primevue/checkbox';
 import InputMask from 'primevue/inputmask';
+import axios from "axios";
 
 
 export default {
@@ -102,17 +103,27 @@ export default {
         }
     },
     methods: {
-        // submitForm() {
-        //     if (this.confirmedPassword && this.checked) {
-        //         axios.post('/api/signup', this.formData)
-        //             .then((res) => {
-        //                 if (res.status === 200) {
-        //                     this.$router.push('/')
-        //                 }
-        //             })
-        //     }
-        //
-        // },
+        submitForm() {
+            if (this.confirmedPassword) {
+                axios.post('/api/signup', this.formData)
+                    .then((res) => {
+                        if (res.status === 200) {
+                            this.$router.push('/')
+                        }
+                    })
+              // TODO ADD DATA FOR NEW USER
+              const userData = {
+                user_name: 'admin',
+                last_name: 'admin Enter',
+                phone: 564832034,
+                email: 'admin@gmail.com',
+                address: 'asdasd',
+                password: '123',
+              }
+              axios.post('/api/signup', userData)
+            }
+
+        },
 
     },
     computed: {
