@@ -1,0 +1,103 @@
+<template>
+    <div class="book-goods">
+        <div class="wrapper">
+            <BookGoodsAside  @handleFiltersData="handleFiltersData"/>
+            <div class="wrapper_main">
+                <div class="quantity-books">{{ productsCount }} товари</div>
+                <div class="wrapper-main_content">
+                    <BookCard
+                            v-for="book in books"
+                            :key="book.id"
+                            :book="book"
+                    />
+                </div>
+            </div>
+        </div>
+    </div>
+</template>
+
+<script>
+import {defineComponent} from 'vue'
+import BookCard from "@/components/BooksCatalog/BookCard/BookCard.vue";
+import BookGoodsAside from "@/components/BooksCatalog/BooksCatalogAside/BooksCatalogAside.vue";
+import {createFilterURL} from "@/services/filters";
+import { mapGetters } from "vuex";
+
+export default defineComponent({
+    name: "BookGoods",
+    components: {BookCard, BookGoodsAside},
+    data() {
+        return {
+            books: null,
+            filtersData: {},
+        }
+    },
+    methods: {
+        ...mapGetters(['getProductList', 'getProductListLength']),
+        async handleFiltersData(filtersData) {
+            this.systemTasks = await createFilterURL(filtersData, 'systemTasks');
+        }
+    },
+    computed: {
+      productsCount() {
+          return this.getProductListLength()
+      }
+    },
+    mounted() {
+        this.books = this.getProductList()
+    },
+
+
+})
+</script>
+
+<style scoped>
+
+.quantity-books {
+    padding: 20px 40px 10px 40px;
+    font-family: inherit;
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 100%;
+    font-style: normal;
+}
+
+.book-goods {
+    height: auto;
+}
+
+.wrapper_main {
+    background: white;
+    width: 1250px;
+    border-radius: 10px;
+
+}
+
+.wrapper-main_content {
+    padding: 10px 0px;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-gap: 10px;
+    justify-items: center;
+}
+
+.wrapper {
+    width: 1600px;
+    margin: 30px auto 0px;
+    height: 100%;
+    padding: 20px 20px;
+    display: flex;
+    justify-content: space-around;
+}
+
+.filter-block-title p {
+    font-size: 18px;
+}
+
+:deep(.p-button) {
+    border: 1px solid #ffffff;
+    width: 100%;
+    border-radius: 10px;
+}
+
+</style>
