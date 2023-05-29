@@ -1,23 +1,6 @@
 <template>
     <div class="report-view">
-
-            <div class="report-search">
-                <span style="color: white; margin-right: 20px">Пошук</span>
-                <span class="p-input-icon-right"
-                      style="margin-right: 20px"
-                >
-                    <i class="pi pi-search"/>
-                    <InputText  placeholder="Search"/>
-                </span>
-                <Button icon="pi pi-search" aria-label="Search" />
-            </div>
-
-            <Table
-                :table-config="tableConfig"
-                :table-data="tableData"
-            />
-
-
+      <h1>Reports</h1>
     </div>
 </template>
 

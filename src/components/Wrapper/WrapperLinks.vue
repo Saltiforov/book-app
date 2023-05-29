@@ -24,10 +24,6 @@ export default {
 
 <style scoped>
 .wrapper-links{
-    height: 100vh;
-    background-image: url('../View/img/bg.png');
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
+    min-height: 100vh;
 }
 </style>

@@ -1,7 +1,7 @@
 <template>
     <div class="VOrderModal" v-show="isVisible">
         <div class="VOrderModal-window">
-            <div class="VOrderModal-window__title">ADD NEW BOOK {{ this.title }}</div>
+            <div class="VOrderModal-window__title">ADD NEW BOOK</div>
             <span class="closeBtn">
               <img
                       src=""
@@ -62,15 +62,13 @@
                                 class="w-full md:w-20rem modal-multiselects__item"
                         />
                     </div>
-                    <div class="modal-multiselects__item">
-                        <MultiSelect
-                                v-model="author"
-                                :options="authorOptions"
-                                optionLabel="name"
-                                placeholder="Select Author"
-                                :maxSelectedLabels="3"
-                                class="w-full md:w-20rem modal-multiselects__item"
-                        />
+                    <div class="modal-author__item">
+                        <div class="flex flex-column gap-2">
+                           <span class="p-float-label">
+                              <InputText id="author" v-model="author"/>
+                              <label for="username">Author name</label>
+                          </span>
+                        </div>
                     </div>
 
                 </div>
@@ -121,6 +119,7 @@ import axios from "axios";
 import InputNumber from 'primevue/inputnumber';
 import InputText from "primevue/inputtext";
 import Calendar from 'primevue/calendar';
+import APIService from "@/services/api";
 
 export default {
     name: "AddNewBookPopup",
@@ -137,33 +136,19 @@ export default {
             author: null,
             sup_id: null,
             formatTypeOptions: [
-                { name: 'Papery', code: 'papery' },
-                { name: 'Electronic', code: 'electronic' },
+                { name: 'Паперова', code: 'паперова' },
+                { name: 'Електронна', code: 'електронна' },
             ],
-            languageOptions: [
-                { name: 'Ukraine', code: 'ukraine' },
-                { name: 'English', code: 'english' },
-                { name: 'French', code: 'french' },
-                { name: 'German', code: 'german' },
-            ],
+            languageOptions: null,
             authorOptions: [
                 { name: 'Ліна Костенко', code: 'lina kostenko' },
                 { name: 'Елізабет Ґілберт', code: 'elizabet gilbert' },
                 { name: 'Ерік Берн', code: 'eric burn' },
                 { name: 'Іван Багряний', code: 'ivan bagryany' },
             ],
-            publisherOptions: [
-                { name: '1', code :1 },
-                { name: '2', code :2 },
-                { name: '3', code :3 },
-                { name: '4', code :4 },
-            ],
-            supOptions: [
-                { name: '5', code :5 },
-                { name: '6', code :6 },
-                { name: '7', code :7 },
-                { name: '8', code :8 },
-            ],
+            publisherOptions: null,
+            supOptions: null,
+            apiService: null,
         };
     },
     methods: {
@@ -180,16 +165,35 @@ export default {
                 publication_date: this.formatDate(this.publication_date),
                 format_type: this.format_type[0].code,
                 language_type: this.language_type[0].code,
-                user_id: '6dd58012-4332-4dff-8853-b3c882f41ee6',
+                user_id: this.publisher_id.code,
                 sup_id: this.sup_id.code,
                 author: this.author[0].name,
             }
             axios.post('/api/new-book', book)
-            axios.post('/api/login', book)
            this.$emit('addNewBook')
-        }
+        },
+
     },
-    mounted() {
+    computed: {
+
+    },
+    async mounted() {
+        this.apiService = new APIService()
+        this.publisherOptions = await this.apiService.getAllUsers()
+        this.supOptions = await this.apiService.getSuppliers()
+        this.languageOptions = await this.apiService.getLanguages()
+        this.supOptions = await this.supOptions.map(item => {
+            return {
+                name: item.supplier_name,
+                code: item.sup_id
+            }
+        })
+        this.publisherOptions = await this.publisherOptions.map(item => {
+            return {
+                name: item.user_name,
+                code: item.user_id
+            }
+        })
     },
 };
 </script>
@@ -207,13 +211,19 @@ export default {
   width: 100%;
 }
 
+.modal-author__item{
+  width: 100%;
+}
+#author{
+  width: 100%;
+}
 .modal-multiselects{
   width: 100%;
   margin-bottom: 20px;
 
     &__item{
       min-width: 100%;
-      margin-bottom: 10px;
+      margin-bottom: 15px;
     }
 }
 
@@ -292,6 +302,12 @@ export default {
 }
 
 :deep(.p-button) {
+  background: #1E39CE;
+  border: 1px solid #2196F3;
+  border-radius: 5px;
+  width: 163px;
+}
+:deep(.p-button:enabled:hover) {
   background: #1E39CE;
   border: 1px solid #2196F3;
   border-radius: 5px;

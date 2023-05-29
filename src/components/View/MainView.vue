@@ -146,7 +146,7 @@ export default defineComponent({
 }
 .main-page {
     width: 100%;
-    height: 100vh;
+    height: 100%;
 }
 
 .content {

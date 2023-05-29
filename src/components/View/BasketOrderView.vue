@@ -70,7 +70,7 @@ export default {
 }
 
 .basket-wrapper{
-    padding: 5px 30px 0px 30px;
+    padding: 5px 30px 15px 30px;
     width: 1500px;
     margin: 0 auto;
 }

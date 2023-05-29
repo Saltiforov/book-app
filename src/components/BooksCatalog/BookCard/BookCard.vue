@@ -20,11 +20,11 @@
                     </div>
 
                     <div class="book-name">
-                        <p>{{truncateNameWord}}</p>
+                        <p>{{this.book.title}}</p>
                     </div>
 
                     <div class="author">
-                        <p>{{truncateAuthorWord || 'Ліна Костенко'}}</p>
+                        <p>Ліна Костенко</p>
                     </div>
 
                     <div class="book-price">
@@ -45,7 +45,9 @@
                         />
                     </div>
                     <div class="buy-book">
-                        <button class="buy-book-btn">Купити</button>
+                        <button class="buy-book-btn"
+                        @click="redirectToBasket(book)"
+                        >Купити</button>
                     </div>
                 </div>
             </div>
@@ -74,25 +76,29 @@ export default defineComponent({
         addToBasket(book) {
             this.ADD_TO_BASKET(book)
         },
+        redirectToBasket(book) {
+            this.ADD_TO_BASKET(book)
+            this.$router.push('/basket')
+        }
     },
     mounted() {
 
     },
     computed: {
-         truncateNameWord() {
-             if(this.book.title.length > 20) {
-              return  this.title.name.slice(0, 20) + '...'
-             }
-             return  this.book.name
-         },
-         truncateAuthorWord() {
-             if(this.book.author) {
-                 if (this.book.author.length > 20){
-                     return  this.book.author.slice(0, 20) + '...'
-                 }
-             }
-             return  this.book.author
-         },
+         // truncateNameWord() {
+         //     if(this.book.title.length > 20) {
+         //      return  this.title.name.slice(0, 20) + '...'
+         //     }
+         //     return  this.book.name
+         // },
+         // truncateAuthorWord() {
+         //     if(this.book.author) {
+         //         if (this.book.author.length > 20){
+         //             return  this.book.author.slice(0, 20) + '...'
+         //         }
+         //     }
+         //     return  this.book.author
+         // },
         extractSubstringId() {
             const regex = /^([^-.]+)/;
             const str = '5661304a-96bc-482d-babe-2f4e166e8b85';
@@ -111,9 +117,10 @@ export default defineComponent({
     font-size: 14px;
     line-height: 15px;
     color: #4A934A;
+    margin-bottom: 5px;
 }
 .bookCard{
-    height: 360px;
+    height: 370px;
     background: #f8f6f6;
     width: 210px;
     margin-bottom: 10px;

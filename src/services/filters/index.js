@@ -9,17 +9,17 @@ const routes = {
 export async function createFilterURL(filtersObject, route) {
     const params = new URLSearchParams();
     console.log('filtersObject', filtersObject)
-    if (filtersObject.special_price) {
-        params.append('special_price', filtersObject.special_price[0]);
-    }
-
-    if (filtersObject.is_top_sale) {
-            params.append('is_top_sale', filtersObject.is_top_sale[0]);
-    }
-
-    if (filtersObject.pending) {
-        params.append('pending', filtersObject.pending[0]);
-    }
+    // if (filtersObject.special_price) {
+    //     params.append('special_price', filtersObject.special_price[0]);
+    // }
+    //
+    // if (filtersObject.is_top_sale) {
+    //         params.append('is_top_sale', filtersObject.is_top_sale[0]);
+    // }
+    //
+    // if (filtersObject.pending) {
+    //     params.append('pending', filtersObject.pending[0]);
+    // }
 
     if (filtersObject.papery) {
         console.log(filtersObject.papery)
@@ -37,8 +37,7 @@ export async function createFilterURL(filtersObject, route) {
     }
 
     const queryString = params.toString();
-    const url = `${BASE_URL}${routes[route]}${window.location.search
-        ? window.location.search + '&' + queryString : '?' + queryString}`;
+    const url = `${BASE_URL}${routes[route]}${window.location.search ? window.location.search + '&' + queryString : '?' + queryString}`;
 
     console.log(url)
 

@@ -45,8 +45,6 @@ export default defineComponent({
       // productsCount() {
       //     return this.getProductListLength()
       // }
-
-
     },
     async mounted() {
         // this.books = this.getProductList()

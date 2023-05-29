@@ -4,38 +4,19 @@
         <div class="books-search">
 
             <Button class="add-book" label="Додати книгу" @click="visible = true"/>
-            <span style="color: white; margin-right: 20px">Пошук</span>
+            <span style="color: black; margin-right: 20px">Пошук</span>
             <span class="p-input-icon-right"
                   style="margin-right: 100px"
             >
                     <i class="pi pi-search"/>
                     <InputText placeholder="Search"/>
             </span>
-
-            <Dropdown
-                    v-model="selectedCity"
-                    :options="cities"
-                    optionLabel="name"
-                    placeholder="Автор"
-                    class="w-full md:w-14rem books-dropdown"
-            />
-            <Dropdown
-                    v-model="selectedGenre"
-                    :options="cities"
-                    optionLabel="name"
-                    placeholder="Жанр"
-                    class="w-full md:w-14rem books-dropdown"
-            />
             <AddNewBookPopup
                     :is-visible="visible"
                     @clickCancelBtn="clickCancelBtn"
                     @addNewBook="addNewBook"
             ></AddNewBookPopup>
 
-            <Button
-                    icon="pi pi-search"
-                    aria-label="Search"
-            />
         </div>
 
         <Table
@@ -111,7 +92,6 @@ export default {
                     style: 'width: 8rem',
                     code: 'sup_id'
                 },
-
             ],
             visible: false,
             tableData: [],
@@ -125,8 +105,6 @@ export default {
             selectedCity: '',
             selectedGenre: '',
             apiService: null,
-            books: null,
-
         }
     },
     methods: {
@@ -142,7 +120,6 @@ export default {
             const day = String(date.getDate()).padStart(2, '0');
             return `${year}-${month}-${day}`;
         },
-
     },
     computed: {},
     async mounted() {

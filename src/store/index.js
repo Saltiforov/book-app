@@ -16,7 +16,7 @@ export default createStore({
             if (state.basket.length) {
                 let isProductExists = false;
                 state.basket.map(item => {
-                    if (item.id === book.id) {
+                    if (item.book_id === book.book_id) {
                         isProductExists = true
                         item.quantity++
                     }
