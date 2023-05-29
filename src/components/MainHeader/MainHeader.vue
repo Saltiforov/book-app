@@ -6,15 +6,15 @@
         <div class="pages-links">
 
             <div class="item-link">
-                <router-link to="/wrapperlinks/books"><p class="item-link-text"> Книги</p></router-link>
+                <router-link to="/wrapper-links/books"><p class="item-link-text"> Книги</p></router-link>
             </div>
 
             <div class="item-link">
-                <router-link to="/wrapperlinks/orders"><p class="item-link-text">Замовлення</p></router-link>
+                <router-link to="/wrapper-links/orders"><p class="item-link-text">Замовлення</p></router-link>
             </div>
 
             <div class="item-link">
-                <router-link to="/wrapperlinks/reports"><p class="item-link-text">Звіти</p></router-link>
+                <router-link to="/wrapper-links/reports"><p class="item-link-text">Звіти</p></router-link>
             </div>
 
         </div>
@@ -40,6 +40,7 @@ export default defineComponent({
 
 
 <style scoped>
+
 
 .main-header {
     background: white;

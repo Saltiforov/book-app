@@ -2,13 +2,14 @@ import {createRouter, createWebHistory} from 'vue-router'
 import LoginPage from "@/components/Login/LoginPage.vue";
 import SignUpPage from "@/components/SignUp/SignUpPage.vue";
 import MainView from "@/components/View/MainView.vue";
-import AddNewBook from "@/components/Modal/AddNewBook.vue";
+// import AddNewBook from "@/components/Modal/AddNewBook.vue";
 import BooksView from "@/components/View/BooksView.vue";
 import OrdersView from "@/components/View/OrdersView.vue";
 import ReportsView from "@/components/View/ReportsView.vue";
 import BasketView from "@/components/View/BasketOrderView.vue";
 import WrapperLinks from "@/components/Wrapper/WrapperLinks.vue";
 import BookGoods from "@/components/BooksCatalog/BooksCatalog.vue";
+
 
 const routes = [
     {
@@ -39,7 +40,7 @@ const routes = [
         ]
     },
     {
-        path: '/wrapperlinks/',
+        path: '/wrapper-links/',
         name: WrapperLinks,
         component: WrapperLinks,
         children: [
@@ -60,11 +61,11 @@ const routes = [
             },
         ]
     },
-    {
-        path: '/AddNewBook',
-        name: AddNewBook,
-        component: AddNewBook
-    },
+    // {
+    //     path: '/add-new-book',
+    //     name: AddNewBook,
+    //     component: AddNewBook
+    // },
 
 
 ]

@@ -1,116 +1,100 @@
 <template>
     <div class="VOrderModal" v-show="isVisible">
         <div class="VOrderModal-window">
-            <div class="VOrderModal-window__title">ADD SYSTEM TASK {{ this.title }}</div>
+            <div class="VOrderModal-window__title">ADD NEW BOOK {{ this.title }}</div>
             <span class="closeBtn">
               <img
                       src=""
                       alt=""
                       @click="this.$emit('clickCloseBtn',)"
               >
-
       </span>
 
             <div class="VOrderModal-window__inputs">
-                <div class="date-row">
+
+                <div class="inputs-info__block">
                     <div class="date-input">
                         <div class="flex flex-column gap-2">
-                            <label for="username" style="color: grey">Start Date</label>
-                            <InputText
-                                    class="date-input__field"
-                                    name="date"
-                                    placeholder="Name"
-                                    type="date"
-                                    v-model="taskData.start_date"
-                            />
+                           <span class="p-float-label">
+                              <InputText id="username" v-model="title"/>
+                              <label for="username">Title name</label>
+                          </span>
+                        </div>
+                    </div>
+                    <div class="date-input">
+                        <div class="flex flex-column gap-2">
+                           <span class="p-float-label">
+                              <InputNumber id="number-input" v-model="price" />
+                              <label for="number-input">Price</label>
+                          </span>
                         </div>
                     </div>
 
-
-                    <div class="date-input">
-                        <div class="flex flex-column gap-2">
-                            <label for="username" style="color: grey">End Date</label>
-                            <InputText
-                                    class="date-input__field"
-                                    name="date"
-                                    placeholder="Name"
-                                    type="date"
-                                    v-model="taskData.end_date"
-                            />
-                        </div>
-                    </div>
                 </div>
-
-
-
 
                 <div class="client-info ">
                     <div class="client-info__name">
-                        <span class="p-float-label ">
-                            <InputText
-                                     class="input-field"
-                                     name="name"
-                                     type="text"
-                                     v-model="taskData.task_name"
-                             />
-                           <label  for="name">Task Name</label>
+                       <span class="p-float-label">
+                          <Calendar class="modal-calendar" v-model="publication_date" inputId="birth_date" />
+                          <label for="birth_date">Publication Date</label>
                       </span>
                     </div>
-                  <div class=" client-info__phone">
-                       <span class="p-float-label ">
-                       <MultiSelect
-                               class="category"
-                               optionLabel="name"
-                               :selectionLimit="1"
-                               :options="optionStatus"
-                               v-model="status"
-                       />
-                        <label for="name">Task Status</label>
-                    </span>
-                  </div>
                 </div>
 
+                <div class="modal-multiselects">
+                    <div class="modal-multiselects__item">
+                        <MultiSelect
+                                v-model="format_type"
+                                :options="formatTypeOptions"
+                                optionLabel="name"
+                                placeholder="Select Format Type"
+                                :maxSelectedLabels="3"
+                                class="w-full md:w-20rem modal-multiselects__item"
+                        />
+                    </div>
+                    <div class="modal-multiselects__item">
+                        <MultiSelect
+                                v-model="language_type"
+                                :options="languageOptions"
+                                optionLabel="name"
+                                placeholder="Select Language"
+                                :maxSelectedLabels="3"
+                                class="w-full md:w-20rem modal-multiselects__item"
+                        />
+                    </div>
+                    <div class="modal-multiselects__item">
+                        <MultiSelect
+                                v-model="author"
+                                :options="authorOptions"
+                                optionLabel="name"
+                                placeholder="Select Author"
+                                :maxSelectedLabels="3"
+                                class="w-full md:w-20rem modal-multiselects__item"
+                        />
+                    </div>
 
-
-                <span class="p-float-label  select-worker">
-                   <MultiSelect
-                           class="worker"
-                           optionLabel="name"
-                           :selectionLimit="1"
-                           :options="workers"
-                           v-model="worker"
-                   />
-                    <label for="name">Select worker</label>
-                </span>
-
-
-                <span class="p-float-label  select-worker">
-                    <MultiSelect
-                            class="worker"
-                            optionLabel="name"
-                            :selectionLimit="1"
-                            :options="partList"
-                            v-model="part"
-                    />
-                    <label for="name">Select parts</label>
-                </span>
-
-                <span class="p-float-label  select-worker">
-                     <MultiSelect
-                             class="category"
-                             optionLabel="name"
-                             :selectionLimit="1"
-                             :options="userRequests"
-                             v-model="user_request"
-                     />
-                    <label for="name">User request</label>
-                </span>
-
-                
-                <div class="text-area">
-                    <VTextarea autoResize rows="4" cols="40" v-model="taskData.textAreaValue"></VTextarea>
                 </div>
 
+                <div class="modal-dropdowns">
+                    <div class="modal-dropdowns__item">
+                        <VDropdown
+                                v-model="publisher_id"
+                                :options="publisherOptions"
+                                optionLabel="name"
+                                placeholder="Select s Publisher"
+                                class="w-full md:w-14rem"
+                        />
+                    </div>
+                    <div class="modal-dropdowns__item">
+                        <VDropdown
+                                v-model="sup_id"
+                                :options="supOptions"
+                                optionLabel="name"
+                                placeholder="Select a Sup"
+                                class="w-full md:w-14rem"
+                        />
+                    </div>
+                </div>
 
             </div>
             <div class="VOrderModal-window__btn">
@@ -134,60 +118,112 @@
 <script>
 
 import axios from "axios";
+import InputNumber from 'primevue/inputnumber';
+import InputText from "primevue/inputtext";
+import Calendar from 'primevue/calendar';
 
 export default {
     name: "AddNewBookPopup",
-    components: {},
+    components: { InputNumber, InputText, Calendar,   },
     props: ['isVisible', 'workers', 'partList', 'userRequests'],
     data() {
         return {
-            taskData: {
-                task_id: '',
-                worker_id: '',
-                request_id: '',
-                task_name: '',
-                start_date: '',
-                end_date: '',
-                summary: '',
-                textAreaValue: '',
-            },
-            worker: '',
-            status: '',
-            user_request: '',
-            part: '',
-            optionStatus: [
-                {name: 'New', code: 1},
-                {name: 'Complete', code: 2},
-                {name: 'In progress', code: 3},
+           title: '',
+            price: null,
+            publication_date: null,
+            format_type: null,
+            language_type: null,
+            publisher_id: null,
+            author: null,
+            sup_id: null,
+            formatTypeOptions: [
+                { name: 'Papery', code: 'papery' },
+                { name: 'Electronic', code: 'electronic' },
             ],
-
+            languageOptions: [
+                { name: 'Ukraine', code: 'ukraine' },
+                { name: 'English', code: 'english' },
+                { name: 'French', code: 'french' },
+                { name: 'German', code: 'german' },
+            ],
+            authorOptions: [
+                { name: 'Ліна Костенко', code: 'lina kostenko' },
+                { name: 'Елізабет Ґілберт', code: 'elizabet gilbert' },
+                { name: 'Ерік Берн', code: 'eric burn' },
+                { name: 'Іван Багряний', code: 'ivan bagryany' },
+            ],
+            publisherOptions: [
+                { name: '1', code :1 },
+                { name: '2', code :2 },
+                { name: '3', code :3 },
+                { name: '4', code :4 },
+            ],
+            supOptions: [
+                { name: '5', code :5 },
+                { name: '6', code :6 },
+                { name: '7', code :7 },
+                { name: '8', code :8 },
+            ],
         };
     },
     methods: {
-      addNewBook() {
-        // TODO ADD DATA FOR NEW BOOK
-        const book = {
-          title: 'new book',
-          price: 2000,
-          publication_date: '2023-05-10',
-          format_type: 'asdasd',
-          language_type: 'asdasd',
-          user_id: '6dd58012-4332-4dff-8853-b3c882f41ee6',
-          sup_id: 1
+        formatDate(date) {
+            const year = date.getFullYear();
+            const month = String(date.getMonth() + 1).padStart(2, '0');
+            const day = String(date.getDate()).padStart(2, '0');
+            return `${year}-${month}-${day}`;
+        },
+        addNewBook() {
+            const book = {
+                title: this.title,
+                price: this.price,
+                publication_date: this.formatDate(this.publication_date),
+                format_type: this.format_type[0].code,
+                language_type: this.language_type[0].code,
+                user_id: '6dd58012-4332-4dff-8853-b3c882f41ee6',
+                sup_id: this.sup_id.code,
+                author: this.author[0].name,
+            }
+            axios.post('/api/new-book', book)
+            axios.post('/api/login', book)
+           this.$emit('addNewBook')
         }
-        axios.post('/api/new-book', book)
-      }
     },
-    mounted() {},
+    mounted() {
+    },
 };
 </script>
 
 <style lang="scss" scoped>
 
 
-:deep(.p-float-label label){
+:deep(.p-float-label label) {
   color: grey;
 }
+
+.inputs-info__block{
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.modal-multiselects{
+  width: 100%;
+  margin-bottom: 20px;
+
+    &__item{
+      min-width: 100%;
+      margin-bottom: 10px;
+    }
+}
+
+.modal-dropdowns{
+  width: 100%;
+  display:flex;
+  justify-content: space-between;
+}
+
+
 
 .text-area {
   resize: none;
@@ -208,6 +244,7 @@ export default {
   width: 100%;
   overflow: auto;
   backdrop-filter: blur(5px);
+  height: 100vh;
 
   &-window {
     width: 700px;
@@ -215,11 +252,11 @@ export default {
     background: white;
     box-shadow: 0 8px 46px rgba(0, 0, 0, 0.25);
     border-radius: 19px;
-    margin: 200px auto;
+    margin: 150px auto;
     display: flex;
     flex-direction: column;
     text-align: center;
-
+    padding: 20px;
     &__btn {
       width: 400px;
       display: flex;
@@ -234,15 +271,16 @@ export default {
       font-size: 24px;
       line-height: 33px;
       color: black;
-      padding-top: 40px;
-      padding-bottom: 30px;
+      padding-top: 30px;
+      padding-bottom: 20px;
     }
 
     &__inputs {
       display: flex;
       flex-direction: column;
       align-items: center;
-      margin-bottom: 25px;
+      width: 500px;
+      margin: 30px auto;
     }
   }
 }
@@ -305,19 +343,14 @@ export default {
 }
 
 .client-info {
-    width: 500px;
-    justify-content: space-between;
-    display: flex;
-    padding: 25px 0px 25px 0px;
-
-  &__name {
-    width: 200px;
-  }
-
-  &__phone {
-    width: 200px;
-  }
+  padding: 25px 0px 25px 0px;
+  width: 100%;
 }
+
+.modal-calendar{
+  width: 100%;
+}
+
 
 .date-row {
   width: 500px;
@@ -366,13 +399,6 @@ export default {
   }
 }
 
-.date-input {
-  width: 500px;
-
-  &__field {
-    width: 100%;
-  }
-}
 
 
 </style>

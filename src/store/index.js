@@ -297,6 +297,10 @@ export default createStore({
         updateCartItems(state, items) {
             state.basket = items;
         },
+        emptyBasket(state, item) {
+             localStorage.removeItem('cart')
+              state.basket = item
+        }
 
     },
     getters: {
@@ -329,5 +333,8 @@ export default createStore({
             const cartItems = JSON.parse(localStorage.getItem('cart')) || [];
             commit('updateCartItems', cartItems);
         },
+        clearBasket({commit}) {
+            commit('emptyBasket', [])
+        }
     }
 })

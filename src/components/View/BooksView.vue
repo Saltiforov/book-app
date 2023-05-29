@@ -28,7 +28,10 @@
       />
       <AddNewBookPopup
       :is-visible="visible"
+      @clickCancelBtn="clickCancelBtn"
+      @addNewBook="addNewBook"
       ></AddNewBookPopup>
+
       <Button
           icon="pi pi-search"
           aria-label="Search"
@@ -50,6 +53,8 @@ import Button from "primevue/button";
 import Table from './../Table/Table.vue'
 import Dropdown from "primevue/dropdown";
 import AddNewBookPopup from "../Modal/AddNewBook.vue";
+import APIService from "../../services/api";
+import axios from "axios";
 
 export default {
   name: "VSignUp",
@@ -164,9 +169,18 @@ export default {
       ],
       selectedCity: '',
       selectedGenre: '',
+      apiService: null,
+      newBooks: null
     }
   },
-  methods: {},
+  methods: {
+      clickCancelBtn() {
+          this.visible = false
+      },
+      addNewBook() {
+          this.visible = false
+      }
+  },
 
 
 }

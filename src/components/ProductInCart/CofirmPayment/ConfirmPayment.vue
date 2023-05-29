@@ -16,7 +16,7 @@
       <Button
           class="confirm-button"
           label="Підтвердити замовлення"
-          @click="confirmPayment"
+          @click="this.$emit('confirmPayment')"
       />
     </div>
   </div>
@@ -48,7 +48,7 @@ export default defineComponent({
       };
 
       axios.post('/api/order-item', orderData);
-      }
+      },
     }
 })
 </script>

@@ -1,7 +1,7 @@
 <template>
   <div class="">
       <div class="link-to-books">
-          <router-link to="/wrapperlinks/books">Тык</router-link>
+          <router-link to="/wrapper-links/books">Тык</router-link>
       </div>
   </div>
 </template>

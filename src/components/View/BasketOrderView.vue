@@ -1,14 +1,15 @@
 <template>
     <div class="basket-view">
         <div class="basket-wrapper">
-            <h2 class="basket-title">Оформлення замовлення</h2>
+            <h2 v-if="!message" class="basket-title">Оформлення замовлення</h2>
+            <Message v-show="message" severity="success">Success Message Content</Message>
            <div class="basket-wrapper__content">
                <VOrdering
-                @sendOrderData="sendOrderData"
+                   @sendContactData="sendContactData"
                />
                <div class="basket-wrapper__content-right">
                    <ProductInCart/>
-                   <ConfirmPayment class="confirm-product" v-show="getBasketCount"/>
+                   <ConfirmPayment class="confirm-product" v-show="this.getBasketCount" @confirmPayment="confirmPayment"/>
                </div>
 
            </div>
@@ -22,21 +23,41 @@
 import ProductInCart from "@/components/ProductInCart/ProductInCart.vue";
 import VOrdering from "@/components/Ordering/VOrdering.vue";
 import ConfirmPayment from "@/components/ProductInCart/CofirmPayment/ConfirmPayment.vue";
-import { mapGetters } from "vuex";
+import { mapGetters, mapActions } from "vuex";
+import Message from 'primevue/message';
+import axios from "axios";
 
 export default {
     name: "BasketView",
-    components: {  ProductInCart, VOrdering, ConfirmPayment },
+    components: {  ProductInCart, VOrdering, ConfirmPayment, Message },
     props: {},
     data() {
-        return {}
-    },
-    methods: {
-        sendOrderData(data) {
-            console.log(data)
+        return {
+            localeData: null,
+            message: false
         }
     },
-    computed: mapGetters(['getBasketCount'])
+    methods: {
+        ...mapActions(['clearBasket', 'loadCartItems']),
+        confirmPayment() {
+            console.log('confirmPayment', this.localeData)
+            this.message = true
+            setTimeout(() => {
+                this.message = false
+                this.$router.push('/')
+                this.clearBasket()
+            },2000)
+            axios.post('/api/order-item', {
+                ...this.localeData,
+                delivery_city: this.localeData.delivery_city.name,
+                delivery_res: this.localeData.delivery_res.name
+            });
+        },
+        sendContactData(value) {
+          this.localeData = value
+        }
+    },
+    computed: mapGetters(['getBasketCount']),
 }
 
 </script>
@@ -44,8 +65,12 @@ export default {
 
 <style scoped>
 
+:deep(.p-message .p-message-wrapper){
+    padding: 0.5rem 0.5rem;
+}
+
 .basket-wrapper{
-    padding: 15px 30px 15px 30px;
+    padding: 5px 30px 0px 30px;
     width: 1500px;
     margin: 0 auto;
 }

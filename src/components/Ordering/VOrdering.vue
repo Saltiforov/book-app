@@ -4,12 +4,12 @@
         <form action="" class="form-order">
 
                  <span class="p-float-label form-item">
-                      <InputText id="username" type="text" v-model="contactData.name"/>
+                      <InputText id="username" type="text" v-model="contactData.first_name"/>
                        <label for="username">Ваше ім’я *</label>
                  </span>
 
             <span class="p-float-label form-item">
-                      <InputText id="username" type="text" v-model="contactData.surname"/>
+                      <InputText id="username" type="text" v-model="contactData.last_name"/>
                        <label for="username">Ваше прізвище *</label>
                  </span>
 
@@ -29,7 +29,7 @@
                 <div class="delivery-wrapper">
                     <div class="delivery-item">
                         <Dropdown
-                                v-model="selectedCity"
+                                v-model="contactData.delivery_city"
                                 editable :options="cities"
                                 optionLabel="name"
                                 placeholder="Оберіть назву міста"
@@ -38,7 +38,7 @@
                     </div>
                     <div class="delivery-item">
                         <Dropdown
-                                v-model="selectedDepartment"
+                                v-model="contactData.delivery_res"
                                 editable :options="cities"
                                 optionLabel="name"
                                 placeholder="Оберіть номер відділення"
@@ -63,7 +63,7 @@ import InputText from "primevue/inputtext";
 import InputMask from 'primevue/inputmask'
 import Textarea from 'primevue/textarea';
 import Dropdown from "primevue/dropdown";
-import { mapGetters } from "vuex";
+import { mapGetters, } from "vuex";
 
 export default defineComponent({
     name: "VOrdering",
@@ -71,12 +71,14 @@ export default defineComponent({
     data() {
         return {
             contactData: {
-                name: '',
-                surname: '',
+                first_name: '',
+                last_name: '',
                 email: '',
                 phone: '',
+                delivery_city: '',
+                delivery_res: '',
                 textArea: '',
-
+                books: this.extractValuesById(this.getBasketItems(), 'id') ,
             },
             cities: [
                 { name: 'New York', code: 'NY' },
@@ -91,18 +93,18 @@ export default defineComponent({
     },
     methods: {
         ...mapGetters(['getBasketItems']),
-        sendOrderData() {
-            const data = {
-                name: this.contactData.name,
-                surname: this.contactData.surname,
-                email: this.contactData.email,
-                phone: this.contactData.phone,
-                textArea: this.contactData.textArea,
-                books: this.getBasketItems()
-            }
-            console.log("DATA", data)
-            this.$emit('sendOrderData', data)
+        extractValuesById(array, idKey) {
+            return array.map(item => item[idKey]);
         }
+    },
+    watch: {
+        contactData: {
+            deep: true,
+            handler(newValue) {
+               this.$emit('sendContactData', newValue )
+            },
+            immediate: true,
+        },
     }
 
 })
