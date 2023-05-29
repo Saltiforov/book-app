@@ -17,7 +17,7 @@ export default class APIService {
     getBooks() {
         return axios.get('/api/books')
             .then((res) => {
-                console.log('LOX',res.data)
+                console.log('getBooks',res.data)
                 return res.data;
             })
             .catch(error => {

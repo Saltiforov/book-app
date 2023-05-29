@@ -21,7 +21,7 @@ import {defineComponent} from 'vue'
 import BookCard from "@/components/BooksCatalog/BookCard/BookCard.vue";
 import BookGoodsAside from "@/components/BooksCatalog/BooksCatalogAside/BooksCatalogAside.vue";
 import {createFilterURL} from "@/services/filters";
-import { mapGetters } from "vuex";
+// import { mapGetters } from "vuex";
 import APIService from "../../services/api";
 
 export default defineComponent({
@@ -36,20 +36,22 @@ export default defineComponent({
         }
     },
     methods: {
-        ...mapGetters(['getProductList', 'getProductListLength']),
+        // ...mapGetters(['getProductList',]),
         async handleFiltersData(filtersData) {
             this.systemTasks = await createFilterURL(filtersData, 'systemTasks');
         }
     },
     computed: {
-      productsCount() {
-          return this.getProductListLength()
-      }
+      // productsCount() {
+      //     return this.getProductListLength()
+      // }
+
+
     },
     async mounted() {
-        this.books = this.getProductList()
+        // this.books = this.getProductList()
         this.apiService = new APIService()
-        this.book = await this.apiService.getBooks()
+        this.books = await this.apiService.getBooks()
     },
 
 

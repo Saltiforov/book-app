@@ -1,7 +1,7 @@
 <template>
     <div class="basket-card">
         <a style="margin-right: 15px" href=""><img class="basket-img"
-                                                   :src="book.img"
+                                                   src="https://static.yakaboo.ua/media/cloudflare/product/webp/600x840/i/m/img_0239_6.jpg"
                                                    alt=""></a>
         <div class="basket-card-info">
             <p class="basket-card__name-book">{{ book.name }}</p>
@@ -9,10 +9,10 @@
             <div class="basket-card-price">{{ book.price }} грн <span>Паперова</span></div>
             <div>Кількість: {{ book.quantity }}</div>
             <span class="basket-card-availability" >
-                <span v-if="book.availability" style="color: green">В наявності</span>
-                <span v-else style="color: red">Не в наявності</span>
+                <span style="color: green">В наявності</span>
+<!--                <span v-else style="color: red">Не в наявності</span>-->
             </span>
-            <span class="basket-card-code">Код товару {{ book.id }}</span>
+            <span class="basket-card-code">Код товару {{ this.extractSubstringId }}</span>
             <p class="basket-delivery" >Доставка по Києву кур'єром сьогодні</p>
         </div>
     </div>
@@ -31,6 +31,14 @@ export default {
     },
     methods: {
 
+    },
+    computed: {
+        extractSubstringId() {
+            const regex = /^([^-.]+)/;
+            const str = '5661304a-96bc-482d-babe-2f4e166e8b85';
+            const result = this.book.book_id.match(regex)[0];
+            return result
+        }
     },
     mounted() {
     }

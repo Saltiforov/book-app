@@ -4,9 +4,9 @@
             <div class="wrapper-book">
                 <div class="book-card-content">
                     <div class="book-poster">
-                        <span class="book-id">{{this.book.id}}</span>
+                        <span class="book-id">{{this.extractSubstringId}}</span>
                         <a href="">
-                            <img :src="this.book.img" alt="" class="book-img-item">
+                            <img src="https://static.yakaboo.ua/media/cloudflare/product/webp/600x840/i/m/img_0239_6.jpg" alt="" class="book-img-item">
                         </a>
                         <div class="book-description">
                         <span
@@ -20,19 +20,20 @@
                     </div>
 
                     <div class="book-name">
-                        <p>{{this.truncateNameWord}}</p>
+                        <p>{{truncateNameWord}}</p>
                     </div>
 
                     <div class="author">
-                        <p>{{this.truncateAuthorWord}}</p>
+                        <p>{{truncateAuthorWord || 'Ліна Костенко'}}</p>
                     </div>
 
                     <div class="book-price">
                         <p>{{this.book.price}} грн</p>
                     </div>
 
-                    <p v-if="this.book.availability" class="availability">В наявності</p>
-                    <p v-else class="unavailability">Не в наявності</p>
+                    <p  class="availability">В наявності</p>
+                    <p class="status-text" >Доставка по Києву кур'єром завтра</p>
+<!--                    <p v-else class="unavailability">Не в наявності</p>-->
                 </div>
 
                 <div class="card-buttons">
@@ -40,7 +41,6 @@
                         <Button
                             label="До кошика"
                             @click="addToBasket(book)"
-                            :disabled="!book.availability"
                             class="add-to-card-btn"
                         />
                     </div>
@@ -79,17 +79,25 @@ export default defineComponent({
 
     },
     computed: {
-        truncateNameWord() {
-            if(this.book.name.length > 20) {
-               return  this.book.name.slice(0, 20) + '...'
-            }
-            return  this.book.name
-        },
-        truncateAuthorWord() {
-            if(this.book.author.length > 20) {
-                return  this.book.author.slice(0, 20) + '...'
-            }
-            return  this.book.author
+         truncateNameWord() {
+             if(this.book.title.length > 20) {
+              return  this.title.name.slice(0, 20) + '...'
+             }
+             return  this.book.name
+         },
+         truncateAuthorWord() {
+             if(this.book.author) {
+                 if (this.book.author.length > 20){
+                     return  this.book.author.slice(0, 20) + '...'
+                 }
+             }
+             return  this.book.author
+         },
+        extractSubstringId() {
+            const regex = /^([^-.]+)/;
+            const str = '5661304a-96bc-482d-babe-2f4e166e8b85';
+            const result = this.book.book_id.match(regex)[0];
+            return result
         }
     }
 })
@@ -99,7 +107,11 @@ export default defineComponent({
 
 <style scoped>
 
-
+.status-text{
+    font-size: 14px;
+    line-height: 15px;
+    color: #4A934A;
+}
 .bookCard{
     height: 360px;
     background: #f8f6f6;

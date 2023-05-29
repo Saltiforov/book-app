@@ -78,7 +78,7 @@ export default defineComponent({
                 delivery_city: '',
                 delivery_res: '',
                 textArea: '',
-                books: this.extractValuesById(this.getBasketItems(), 'id') ,
+                books: this.extractValuesById(this.getBasketItems(), 'book_id') ,
             },
             cities: [
                 { name: 'New York', code: 'NY' },
@@ -105,6 +105,8 @@ export default defineComponent({
             },
             immediate: true,
         },
+    },
+    computed: {
     }
 
 })
