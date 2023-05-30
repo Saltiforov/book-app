@@ -55,5 +55,23 @@ export default class APIService {
                 console.error(error)
             })
     }
+    getSalesReports() {
+        return axios.get('/api/sales-reports')
+            .then((res) => {
+                return res.data;
+            })
+            .catch(error => {
+                console.error(error)
+            })
+    }
 
+    getSupplierReports() {
+        return axios.get('/api/supplier-report')
+            .then((res) => {
+                return res.data;
+            })
+            .catch(error => {
+                console.error(error)
+            })
+    }
 }

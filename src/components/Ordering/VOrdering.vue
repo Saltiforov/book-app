@@ -50,7 +50,7 @@
 
             <div class="comment-order">
                 <h4 class="comment-title">Коментар до замовлення</h4>
-                <Textarea class="order-textarea" v-model="contactData.textArea" autoResize rows="5" cols="116" />
+                <Textarea class="order-textarea" v-model="contactData.comment" autoResize rows="5" cols="116" />
             </div>
 
         </form>
@@ -77,7 +77,7 @@ export default defineComponent({
                 phone: '',
                 delivery_city: '',
                 delivery_res: '',
-                textArea: '',
+                comment: '',
                 books: this.extractValuesById(this.getBasketItems(), 'book_id') ,
             },
             cities: [

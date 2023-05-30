@@ -21,14 +21,13 @@ import Checkbox from 'primevue/checkbox';
 import Sidebar from 'primevue/sidebar';
 import Slider from 'primevue/slider';
 import Menu from 'primevue/menu';
-
-
-
+import VueApexCharts from "vue3-apexcharts";
 
 const app = createApp(App)
 app.use(PrimeVue);
 app.use(router)
 app.use(Vuex)
+app.use(VueApexCharts)
 
 
 app.component('DataTable', DataTable);
@@ -42,4 +41,5 @@ app.component('MultiSelect', MultiSelect);
 app.component('InputText', InputText)
 app.component('VButton', Button)
 app.component('VPassword', Password)
+app.component('apexchart', VueApexCharts)
 app.mount('#app')

@@ -1,6 +1,6 @@
 <template>
     <div class="report-view">
-      <h1>Reports</h1>
+      <Reports/>
     </div>
 </template>
 
@@ -8,9 +8,10 @@
 import InputText from 'primevue/inputtext';
 import Button from "primevue/button";
 import Table from './../Table/Table.vue'
+import Reports from "@/components/Reports/Reports.vue";
 export default {
     name: "VSignUp",
-    components: { InputText, Button, Table },
+    components: {Reports, InputText, Button, Table },
     props: {},
     data() {
         return {
