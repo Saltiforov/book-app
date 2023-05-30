@@ -25,6 +25,7 @@
         :edit-config="editConfig"
         :edit-column="true"
         @handleEditTask="handleEditItem"
+        @handledDelete="deleteItem"
     />
 
   </div>
@@ -125,8 +126,12 @@ export default {
       if (index !== -1) {
         this.tableData[index] = updatedItem;
       }
-    }
-
+    },
+    async deleteItem(data) {
+      const {order_id} = data;
+      await this.apiService.deleteOrderItem(order_id);
+      this.tableData = await this.apiService.getBookOrders()
+    },
   },
   async mounted() {
     this.apiService = new APIService()

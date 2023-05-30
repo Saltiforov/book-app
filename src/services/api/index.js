@@ -77,4 +77,7 @@ export default class APIService {
     deleteBook(id) {
         return axios.delete(`/api/books/${id}`)
     }
+    deleteOrderItem(id) {
+        return axios.delete(`/api/order-item/${id}`)
+    }
 }
