@@ -19,6 +19,13 @@
 
         </div>
 
+        <EditModal
+           :is-visible="isVisible"
+           :languages="languages"
+           :book-type="book_type"
+           :edit-task-data="editTaskData"
+        />
+
         <Table
                 :table-config="tableConfig"
                 :table-data="tableData"
@@ -37,12 +44,12 @@ import Table from './../Table/Table.vue'
 import Dropdown from "primevue/dropdown";
 import AddNewBookPopup from "../Modal/AddNewBook.vue";
 import APIService from "../../services/api";
-import axios from "axios";
+import EditModal from "@/components/Modal/EditModal.vue";
 import {createFilterURL} from "@/services/filters";
 
 export default {
     name: "VSignUp",
-    components: {AddNewBookPopup, InputText, Button, Table, Dropdown},
+    components: {AddNewBookPopup, InputText, Button, Table, Dropdown, EditModal},
     props: {},
     data() {
         return {
@@ -111,7 +118,13 @@ export default {
             apiService: null,
             booksSearch: '',
             filtersData: null,
-            lox: null,
+            languages: null,
+            book_type: [
+                { name: 'Паперова', code: 'papery' },
+                { name: 'Електронна', code: 'electronic' },
+            ],
+            isVisible: false,
+            editTaskData: null,
         }
     },
     methods: {
@@ -131,7 +144,8 @@ export default {
             this.tableData = await createFilterURL({searchBooks: this.booksSearch}, 'books')
         },
         handleEditTask(data) {
-            console.log(data)
+            this.editTaskData = data
+            this.isVisible = true
         }
 
 
@@ -141,7 +155,7 @@ export default {
     async mounted() {
         this.apiService = new APIService()
         this.tableData = await this.apiService.getBooks()
-
+        this.languages = await this.apiService.getLanguages()
     }
 
 

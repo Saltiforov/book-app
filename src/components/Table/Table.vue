@@ -14,8 +14,17 @@
                   field="quantity"
                   header="Edit"
                   :style="editConfig.style"
-          ><div class="">
-          </div></Column>
+          >
+              <template #body="{ data }">
+                  <div class="edit-task">
+                      <Menu
+                              @handleEditTask="handleEditTask"
+                              @handledDelete="handledDelete"
+                              :edit-task-data="data"
+                      />
+                  </div>
+              </template>
+          </Column>
       </DataTable>
   </div>
 </template>
@@ -24,10 +33,11 @@
 import {defineComponent} from 'vue'
 import DataTable  from "primevue/datatable";
 import Column from "primevue/column";
+import Menu from "@/components/EditMenu/Menu.vue";
 
 export default defineComponent({
     name: "VTable",
-    components: { DataTable, Column },
+    components: { DataTable, Column, Menu },
     props: ['tableConfig', 'tableData', 'editColumn', 'editConfig'],
     data() {
         return {
@@ -57,11 +67,13 @@ export default defineComponent({
                     to: '/fileupload'
                 }
             ],
+            dataEdit: null
         }
     },
     methods: {
         handleEditTask(data) {
             this.$emit('handleEditTask', data)
+            console.log(data)
         },
         handledDelete(data) {
             this.$emit('handledDelete', data)

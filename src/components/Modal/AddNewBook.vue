@@ -165,7 +165,7 @@ export default {
                 language_type: this.language_type,
                 user_id: this.publisher_id.code,
                 sup_id: this.sup_id.code,
-                author: this.author[0].name,
+                author: this.author.code,
             }
             axios.post('/api/new-book', book)
            this.$emit('addNewBook')
