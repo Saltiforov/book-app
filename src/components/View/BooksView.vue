@@ -24,6 +24,9 @@
            :languages="languages"
            :book-type="book_type"
            :edit-task-data="editTaskData"
+           :users-list="usersList"
+           :sup-id-list="supIdList"
+           @close="closeEditWindow"
         />
 
         <Table
@@ -126,6 +129,8 @@ export default {
             ],
             isVisible: false,
             editTaskData: null,
+            usersList: null,
+            supIdList: null
         }
     },
     methods: {
@@ -134,6 +139,9 @@ export default {
         },
         addNewBook() {
             this.visible = false
+        },
+        closeEditWindow(){
+          this.isVisible = false
         },
         formatDate(date) {
             const year = date.getFullYear();
@@ -154,6 +162,11 @@ export default {
           const {book_id} = data;
           await this.apiService.deleteBook(book_id);
           this.tableData = await createFilterURL({}, 'books');
+        },
+        extractSegment(str) {
+            const regex = /^([a-zA-Z0-9]+)/;
+            const match = str.match(regex);
+            return match ? match[1] : '';
         }
 
 
@@ -162,7 +175,28 @@ export default {
     async mounted() {
         this.apiService = new APIService()
         this.tableData = await this.apiService.getBooks()
+        // this.tableData = this.tableData.map(item => {
+        //     return {
+        //         ...item,
+        //         user_id: this.extractSegment(item.user_id),
+        //         book_id: this.extractSegment(item.book_id),
+        //     }
+        // })
         this.languages = await this.apiService.getLanguages()
+        this.usersList = await this.apiService.getAllUsers()
+        this.supIdList = await this.apiService.getSuppliers()
+        this.supIdList = this.supIdList.map(supplier => {
+            return {
+                name: supplier.supplier_name,
+                code: supplier.sup_id
+            }
+        })
+        this.usersList = this.usersList.map(user => {
+            return {
+                name: user.user_id,
+                code: user.user_name
+            }
+        })
     }
 
 

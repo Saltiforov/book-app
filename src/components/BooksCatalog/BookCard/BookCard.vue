@@ -85,20 +85,6 @@ export default defineComponent({
 
     },
     computed: {
-         // truncateNameWord() {
-         //     if(this.book.title.length > 20) {
-         //      return  this.title.name.slice(0, 20) + '...'
-         //     }
-         //     return  this.book.name
-         // },
-         // truncateAuthorWord() {
-         //     if(this.book.author) {
-         //         if (this.book.author.length > 20){
-         //             return  this.book.author.slice(0, 20) + '...'
-         //         }
-         //     }
-         //     return  this.book.author
-         // },
         extractSubstringId() {
             const regex = /^([^-.]+)/;
             const str = '5661304a-96bc-482d-babe-2f4e166e8b85';

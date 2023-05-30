@@ -12,14 +12,14 @@
 
             <div className="VOrderModal-window__inputs">
 
-                <div className="form__element">
-                    <div class="flex flex-column gap-2">
+                <div className="form__element" >
+                    <div class="flex flex-column gap-2 " style="padding-bottom: 30px">
                            <span class="p-float-label">
                               <InputText class="form__element-item" id="username" v-model="taskData.title"/>
                               <label for="username">Назва</label>
                           </span>
                     </div>
-                    <div class="flex flex-column gap-2">
+                    <div class="flex flex-column gap-2 form__element-item">
                            <span class="p-float-label">
                               <InputText class="form__element-item" id="username" v-model="taskData.price"/>
                               <label for="username">Цена</label>
@@ -60,19 +60,11 @@
                         </div>
                     </div>
                 </div>
-                <span className="form__element p-float-label">
-                    <VDropdown
-                            v-model="taskData.language_type"
-                            :options="languages"
-                            optionLabel="name"
-                            placeholder="Change book id"
-                            class="w-full md:w-14rem book-id__item"
-                    />
-                </span>
+
                 <span className="form__element p-float-label">
                     <VDropdown
                             v-model="taskData.user_id"
-                            :options="languageOptions"
+                            :options="usersList"
                             optionLabel="name"
                             placeholder="Change user id"
                             class="w-full md:w-14rem book-id__item"
@@ -81,7 +73,7 @@
                 <span className="form__element p-float-label">
                       <VDropdown
                               v-model="taskData.sup_id"
-                              :options="languageOptions"
+                              :options="supIdList"
                               optionLabel="name"
                               placeholder="Change sup id"
                               class="w-full md:w-14rem book-id__item"
@@ -118,44 +110,39 @@ import Button from "primevue/button";
 export default {
     name: "EditSystemTaskPopup",
     components: { Calendar, Button },
-    props: ['editTaskData', 'isVisible', 'languages', 'bookType', 'userRequests'],
+    props: ['editTaskData', 'isVisible', 'languages', 'bookType', 'userRequests', 'usersList','supIdList'],
     data() {
         return {
             taskData: {
                 title: '',
                 price: null,
                 publication_date: '',
-                language: '',
+                language_type: '',
                 format_type: '',
                 book_id: '',
                 user_id: '',
                 sup_id: '',
             },
-
             optionStatus: ['New', 'Complete', 'In progress'],
-
         };
     },
     computed: {
 
     },
     methods: {
-
         save() {
-            const formattedStartDate = moment(this.taskData.start_date).format('YYYY-MM-DD HH:mm:ss');
-            const formattedEndDate = moment(this.taskData.end_date).format('YYYY-MM-DD HH:mm:ss');
+            const publicationDate = moment(this.taskData.publication_date).format('YYYY-MM-DD HH:mm:ss');
 
-            axios.put(`/api/system-tasks/${this.taskData.task_id}`, {
-                task_id: this.taskData.task_id,
-                worker_id: this.taskData.worker.id,
-                request_id: this.taskData.request_id,
-                task_name: this.taskData.task_name,
-                start_date: formattedStartDate,
-                end_date: formattedEndDate,
-                summary: this.taskData.summary,
-                status: this.taskData.status,
-                part_id: this.taskData.book_id
+            axios.put(`/api/books/${this.taskData.book_id}`, {
+                title: this.taskData.title,
+                price: this.taskData.price,
+                publication_date: publicationDate,
+                language_type: this.taskData.language_type['code'],
+                format_type: this.taskData.format_type['code'],
+                user_id: this.taskData.user_id['name'],
+                sup_id: this.taskData.sup_id['code'],
             })
+            console.log()
             this.$emit('close')
             this.$emit('update-data')
         },
@@ -165,7 +152,10 @@ export default {
             handler(newVal) {
                 this.taskData = {
                     ...newVal,
-                    part: [newVal.part]
+                    language_type: this.languages.find(lang => lang['code'] === newVal.language_type),
+                    format_type: this.bookType.find(book => book['code'] === newVal.format_type),
+                    user_id: this.usersList && this.usersList.find(item => item.name === newVal.user_id),
+                    sup_id: this.supIdList.find(supp => supp['code'] === newVal.sup_id)
                 };
             },
         },
@@ -175,7 +165,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-
 
 
 .book-id__item{
@@ -251,7 +240,7 @@ export default {
 
     &__inputs .form__element {
       width: 100%;
-      margin-bottom: 30px;
+      margin-bottom: 50px;
     }
   }
 }
