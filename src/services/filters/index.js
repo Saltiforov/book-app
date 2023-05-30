@@ -8,7 +8,7 @@ const routes = {
 
 export async function createFilterURL(filtersObject, route) {
     const params = new URLSearchParams();
-    console.log('filtersObject', filtersObject)
+
     if (filtersObject.format_type) {
         params.append('format_type', filtersObject.format_type[0]);
     }
@@ -25,6 +25,9 @@ export async function createFilterURL(filtersObject, route) {
         params.append('search', filtersObject.ordersText);
     }
 
+    if (filtersObject.available) {
+        params.append('available', filtersObject.available);
+    }
 
     if (filtersObject.language_type && filtersObject.language_type.length > 0) {
         const languages = filtersObject.language_type.map(item => item).join(',');
@@ -36,23 +39,14 @@ export async function createFilterURL(filtersObject, route) {
         params.append('max_price', filtersObject.price[1]);
     }
 
-
-
-
-/*
-    if (filtersObject.max_price) {
-        params.append('max_price', filtersObject.max_price);
-    }*/
-
     const queryString = params.toString();
     const url = `${BASE_URL}${routes[route]}${window.location.search ? window.location.search + '&' + queryString : '?' + queryString}`;
 
-    console.log(url)
-
-     return axios
-         .get(url)
-         .then(response => {
+    return axios
+        .get(url)
+        .then(response => {
             return response.data;
-         })
-         .catch(e => console.log(e));
+        })
+        .catch(e => console.log(e));
 }
+
