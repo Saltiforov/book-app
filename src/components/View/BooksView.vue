@@ -32,6 +32,7 @@
                 :edit-column="true"
                 :edit-config="editConfig"
                 @handleEditTask="handleEditTask"
+                @handledDelete="deleteItem"
         />
 
     </div>
@@ -146,8 +147,14 @@ export default {
         handleEditTask(data) {
             this.editTaskData = data
             this.isVisible = true
-        }
+        },
 
+        async deleteItem(data) {
+          console.log('deleteItem', data)
+          const {book_id} = data;
+          await this.apiService.deleteBook(book_id);
+          this.tableData = await createFilterURL({}, 'books');
+        }
 
 
     },

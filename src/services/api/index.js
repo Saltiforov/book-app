@@ -74,4 +74,7 @@ export default class APIService {
                 console.error(error)
             })
     }
+    deleteBook(id) {
+        return axios.delete(`/api/books/${id}`)
+    }
 }

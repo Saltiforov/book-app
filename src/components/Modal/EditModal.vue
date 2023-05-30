@@ -154,7 +154,7 @@ export default {
                 end_date: formattedEndDate,
                 summary: this.taskData.summary,
                 status: this.taskData.status,
-                part_id: this.taskData.part_id
+                part_id: this.taskData.book_id
             })
             this.$emit('close')
             this.$emit('update-data')
