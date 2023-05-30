@@ -6,11 +6,14 @@
             </div>
 
             <div class="header-search">
-                <InputText @change="handleFiltersData( 'searchQuery' , searchText)" type="text" v-model="searchText" placeholder="Знайти книгу"/>
+                <InputText type="text" v-model="searchText" placeholder="Знайти книгу"/>
             </div>
 
             <div class="header-search__btn">
-                <Button label="Пошук"/>
+                <Button
+                    label="Пошук"
+
+                />
             </div>
 
             <div class="basket-link">
@@ -53,7 +56,9 @@
             </div>
 
         </div>
-        <router-view class="content"/>
+        <router-view
+            :searchText="searchText"
+            class="content"/>
     </div>
 </template>
 

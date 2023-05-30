@@ -19,6 +19,8 @@ import Column from 'primevue/column';
 import Dropdown from 'primevue/dropdown';
 import Checkbox from 'primevue/checkbox';
 import Sidebar from 'primevue/sidebar';
+import Slider from 'primevue/slider';
+import Menu from 'primevue/menu';
 
 
 
@@ -30,6 +32,8 @@ app.use(Vuex)
 
 
 app.component('DataTable', DataTable);
+app.component('Menu', Menu);
+app.component('Slider', Slider);
 app.component('VSidebar', Sidebar);
 app.component('VCheckbox', Checkbox);
 app.component('VDropdown', Dropdown);

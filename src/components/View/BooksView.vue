@@ -4,12 +4,12 @@
         <div class="books-search">
 
             <Button class="add-book" label="Додати книгу" @click="visible = true"/>
-            <span style="color: black; margin-right: 20px">Пошук</span>
+            <span class="books-search__input">Пошук</span>
             <span class="p-input-icon-right"
                   style="margin-right: 100px"
             >
                     <i class="pi pi-search"/>
-                    <InputText placeholder="Search"/>
+                    <InputText @input="handleFiltersData()" v-model="booksSearch" placeholder="Search"/>
             </span>
             <AddNewBookPopup
                     :is-visible="visible"
@@ -22,8 +22,10 @@
         <Table
                 :table-config="tableConfig"
                 :table-data="tableData"
+                :edit-column="true"
+                :edit-config="editConfig"
+                @handleEditTask="handleEditTask"
         />
-
 
     </div>
 </template>
@@ -36,6 +38,7 @@ import Dropdown from "primevue/dropdown";
 import AddNewBookPopup from "../Modal/AddNewBook.vue";
 import APIService from "../../services/api";
 import axios from "axios";
+import {createFilterURL} from "@/services/filters";
 
 export default {
     name: "VSignUp",
@@ -71,28 +74,29 @@ export default {
                 {
                     header: 'language_type',
                     sortable: true,
-                    style: 'width: 8rem',
+                    style: 'width: 5rem',
                     code: 'language_type'
                 },
                 {
                     header: 'book_id',
                     sortable: true,
-                    style: 'width: 8rem',
+                    style: 'width: 10rem',
                     code: 'book_id'
                 },
                 {
                     header: 'user_id',
                     sortable: true,
-                    style: 'width: 8rem',
+                    style: 'width: 10rem',
                     code: 'user_id'
                 },
                 {
                     header: 'sup_id',
                     sortable: true,
-                    style: 'width: 8rem',
+                    style: 'width: 6rem',
                     code: 'sup_id'
                 },
             ],
+            editConfig: {style: 'width: 6rem'},
             visible: false,
             tableData: [],
             cities: [
@@ -105,6 +109,9 @@ export default {
             selectedCity: '',
             selectedGenre: '',
             apiService: null,
+            booksSearch: '',
+            filtersData: null,
+            lox: null,
         }
     },
     methods: {
@@ -120,6 +127,15 @@ export default {
             const day = String(date.getDate()).padStart(2, '0');
             return `${year}-${month}-${day}`;
         },
+         async handleFiltersData() {
+            this.tableData = await createFilterURL({searchBooks: this.booksSearch}, 'books')
+        },
+        handleEditTask(data) {
+            console.log(data)
+        }
+
+
+
     },
     computed: {},
     async mounted() {
@@ -140,6 +156,11 @@ export default {
     padding: 30px;
 }
 
+.books-search__input{
+    color: black;
+    margin-right: 20px;
+    font-size: 18px;
+}
 .books-view {
     padding: 30px;
 }

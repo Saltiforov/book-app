@@ -9,6 +9,13 @@
                   :sortable="item.sortable"
                   :style="item.style">
           </Column>
+          <Column
+                  v-if="editColumn"
+                  field="quantity"
+                  header="Edit"
+                  :style="editConfig.style"
+          ><div class="">
+          </div></Column>
       </DataTable>
   </div>
 </template>
@@ -21,12 +28,46 @@ import Column from "primevue/column";
 export default defineComponent({
     name: "VTable",
     components: { DataTable, Column },
-    props: ['tableConfig', 'tableData'],
+    props: ['tableConfig', 'tableData', 'editColumn', 'editConfig'],
     data() {
         return {
-
+            items: [
+                {
+                    label: 'Update',
+                    icon: 'pi pi-refresh',
+                    command: () => {
+                        this.$toast.add({severity: 'success', summary: 'Updated', detail: 'Data Updated', life: 3000});
+                    }
+                },
+                {
+                    label: 'Delete',
+                    icon: 'pi pi-times',
+                    command: () => {
+                        this.$toast.add({severity: 'warn', summary: 'Delete', detail: 'Data Deleted', life: 3000});
+                    }
+                },
+                {
+                    label: 'Vue Website',
+                    icon: 'pi pi-external-link',
+                    url: 'https://vuejs.org/'
+                },
+                {
+                    label: 'Router',
+                    icon: 'pi pi-upload',
+                    to: '/fileupload'
+                }
+            ],
         }
-    }
+    },
+    methods: {
+        handleEditTask(data) {
+            this.$emit('handleEditTask', data)
+        },
+        handledDelete(data) {
+            this.$emit('handledDelete', data)
+        }
+    },
+
 })
 </script>
 

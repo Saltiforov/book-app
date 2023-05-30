@@ -43,23 +43,21 @@
 
                 <div class="modal-multiselects">
                     <div class="modal-multiselects__item">
-                        <MultiSelect
+                        <VDropdown
                                 v-model="format_type"
                                 :options="formatTypeOptions"
                                 optionLabel="name"
-                                placeholder="Select Format Type"
-                                :maxSelectedLabels="3"
-                                class="w-full md:w-20rem modal-multiselects__item"
+                                placeholder="Select s Publisher"
+                                class="w-full md:w-14rem format-type"
                         />
                     </div>
                     <div class="modal-multiselects__item">
-                        <MultiSelect
+                        <VDropdown
                                 v-model="language_type"
                                 :options="languageOptions"
                                 optionLabel="name"
-                                placeholder="Select Language"
-                                :maxSelectedLabels="3"
-                                class="w-full md:w-20rem modal-multiselects__item"
+                                placeholder="Select s Publisher"
+                                class="w-full md:w-14rem language-type"
                         />
                     </div>
                     <div class="modal-author__item">
@@ -136,8 +134,8 @@ export default {
             author: null,
             sup_id: null,
             formatTypeOptions: [
-                { name: 'Паперова', code: 'паперова' },
-                { name: 'Електронна', code: 'електронна' },
+                { name: 'Паперова', code: 'papery' },
+                { name: 'Електронна', code: 'electronic' },
             ],
             languageOptions: null,
             authorOptions: [
@@ -163,7 +161,7 @@ export default {
                 title: this.title,
                 price: this.price,
                 publication_date: this.formatDate(this.publication_date),
-                format_type: this.format_type[0].code,
+                format_type: this.format_type.code,
                 language_type: this.language_type,
                 user_id: this.publisher_id.code,
                 sup_id: this.sup_id.code,
@@ -213,6 +211,7 @@ export default {
 
 .modal-author__item{
   width: 100%;
+  padding: 15px 0px;
 }
 #author{
   width: 100%;
@@ -233,7 +232,12 @@ export default {
   justify-content: space-between;
 }
 
-
+.language-type{
+  width: 100% !important;
+}
+.format-type{
+  width: 100% !important;
+}
 
 .text-area {
   resize: none;

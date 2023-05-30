@@ -57,9 +57,6 @@ export default createStore({
         getProductList(state) {
             return state.books
         },
-        // getProductListLength(state) {
-        //     return state.books.length
-        // }
 
     },
     actions: {

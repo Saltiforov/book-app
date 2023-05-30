@@ -26,6 +26,7 @@ const routes = [
         path: '/',
         name: MainView,
         component: MainView,
+        props: true,
         children: [
             {
                 path: '',

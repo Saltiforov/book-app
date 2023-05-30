@@ -36,7 +36,7 @@
                             <p >Наявність</p>
                         </div>
                         <div class="flex align-items-center filter-item">
-                            <Checkbox  @change="handleFiltersData( 'availability' ,available)" v-model="available" inputId="ingredient1" name="availability"
+                            <Checkbox  inputId="ingredient1" name="availability"
                                       value="true"/>
                             <label for="ingredient5" class="ml-2">
                                 Товари в наявності
@@ -61,18 +61,27 @@
                         </div>
 
                     </div>
+
                     <div class="filter-block">
                         <div class="filter-block-title ">
-                            <p >Ціна</p>
+                           <div class="min-price">
+                               <span style="margin-right: 5px;">Максимальна ціна :</span>
+                               <span>{{ this.priceRange ? this.priceRange[0] : 0 }}</span>
+                           </div>
+                           <div class="max-price">
+                               <span style="margin-right: 5px;">Мінімальна ціна :</span>
+                               <span>{{ this.priceRange ? this.priceRange[1] : 100 }}</span>
+                           </div>
                         </div>
                         <div class="filter-block_price">
-                            <InputNumber class="input-price"  @input="handleFiltersData( 'min_price' ,price.minPrice)" v-model="price.minPrice"  inputId="percent" prefix="Від  " />
-                            <InputNumber  class="input-price"  @input="handleFiltersData( 'max_price' ,price.maxPrice)" v-model="price.maxPrice" inputId="percent" prefix="До  " />
-                        </div>
-                        <div class="price-btn">
-<!--                            <Button @click="handleFiltersData( 'price' ,price)"  label="Застосувати" :disabled="priceBtn" />-->
+                            <Slider
+                                @change="handleFiltersData('price', priceRange)"
+                                v-model="priceRange"
+                                range class="w-14rem"
+                            />
                         </div>
                     </div>
+
                 </div>
             </div>
 </template>
@@ -102,6 +111,7 @@ export default defineComponent({
             priceBtn: false,
             filtersData: {},
             apiService: null,
+            priceRange: null,
         }
     },
     methods: {

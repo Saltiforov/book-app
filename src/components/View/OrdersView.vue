@@ -7,7 +7,7 @@
                   style="margin-right: 20px"
             >
                     <i class="pi pi-search"/>
-                    <InputText placeholder="Search"/>
+                    <InputText @input="handleFiltersData()" placeholder="Search" v-model="ordersText"/>
                 </span>
             <Button icon="pi pi-search" aria-label="Search"/>
         </div>
@@ -25,6 +25,7 @@ import InputText from 'primevue/inputtext';
 import Button from "primevue/button";
 import Table from './../Table/Table.vue'
 import APIService from "../../services/api";
+import {createFilterURL} from "@/services/filters";
 
 export default {
     name: "VSignUp",
@@ -90,10 +91,16 @@ export default {
 
             ],
             apiService: null,
-            tableData: []
+            tableData: [],
+            orders: null,
+            filtersData: null,
         }
     },
-    methods: {},
+    methods: {
+        async handleFiltersData() {
+            this.tableData = await createFilterURL({ordersText: this.ordersText}, 'books')
+        },
+    },
     async mounted() {
         this.apiService = new APIService()
         this.tableData = await this.apiService.getBookOrders()
@@ -103,9 +110,7 @@ export default {
                 books: book.books.map(item => item.book_id).join(', ')
             }
         })
-    }
-
-
+    },
 }
 
 </script>

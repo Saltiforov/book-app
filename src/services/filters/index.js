@@ -10,13 +10,19 @@ export async function createFilterURL(filtersObject, route) {
     const params = new URLSearchParams();
     console.log('filtersObject', filtersObject)
     if (filtersObject.format_type) {
-        console.log(filtersObject.format_type)
         params.append('format_type', filtersObject.format_type[0]);
     }
 
-    if (filtersObject.searchQuery) {
-        console.log(filtersObject.format_type)
-        params.append('searchQuery', filtersObject.format_type[0]);
+    if (filtersObject.searchBooks) {
+        params.append('searchQuery', filtersObject.searchBooks);
+    }
+
+    if (filtersObject.mainSearchValue) {
+        params.append('searchQuery', filtersObject.mainSearchValue);
+    }
+
+    if (filtersObject.ordersText) {
+        params.append('search', filtersObject.ordersText);
     }
 
 
@@ -25,13 +31,18 @@ export async function createFilterURL(filtersObject, route) {
         params.append('language_type', languages);
     }
 
-    if (filtersObject.min_price) {
-        params.append('min_price', filtersObject.min_price);
+    if (filtersObject.price) {
+        params.append('min_price', filtersObject.price[0]);
+        params.append('max_price', filtersObject.price[1]);
     }
 
+
+
+
+/*
     if (filtersObject.max_price) {
         params.append('max_price', filtersObject.max_price);
-    }
+    }*/
 
     const queryString = params.toString();
     const url = `${BASE_URL}${routes[route]}${window.location.search ? window.location.search + '&' + queryString : '?' + queryString}`;

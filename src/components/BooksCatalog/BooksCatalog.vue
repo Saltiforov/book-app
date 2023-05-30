@@ -1,7 +1,9 @@
 <template>
     <div class="book-goods">
         <div class="wrapper">
-            <BookGoodsAside  @handleFiltersData="handleFiltersData"/>
+            <BookGoodsAside
+                @handleFiltersData="handleFiltersData"
+            />
             <div class="wrapper_main">
                 <div class="quantity-books">{{ productsCount }} товари</div>
                 <div class="wrapper-main_content">
@@ -26,15 +28,17 @@ import APIService from "../../services/api";
 
 export default defineComponent({
     name: "BookGoods",
+    props: ['searchText'],
     components: {BookCard, BookGoodsAside},
     data() {
         return {
             books: null,
             filtersData: {},
             apiService: null,
-            book: null
+            book: null,
         }
     },
+
     methods: {
         async handleFiltersData(filtersData) {
             this.books = await createFilterURL(filtersData, 'books');
@@ -44,9 +48,16 @@ export default defineComponent({
 
     },
     async mounted() {
-        // this.books = this.getProductList()
         this.apiService = new APIService()
         this.books = await this.apiService.getBooks()
+    },
+    watch: {
+        searchText: {
+            immediate: true,
+            handler(newText) {
+                this.books = this.handleFiltersData({mainSearchValue: newText})
+            }
+        }
     },
 
 
@@ -65,7 +76,7 @@ export default defineComponent({
 }
 
 .book-goods {
-    height: auto;
+    min-height: 89.4vh;
 }
 
 .wrapper_main {
