@@ -6,7 +6,7 @@
             </div>
 
             <div class="header-search">
-                <InputText type="text" placeholder="Знайти книгу"/>
+                <InputText @change="handleFiltersData( 'searchQuery' , searchText)" type="text" v-model="searchText" placeholder="Знайти книгу"/>
             </div>
 
             <div class="header-search__btn">
@@ -65,6 +65,7 @@ import Sidebar from "primevue/sidebar";
 import BasketCard from "@/components/BasketCard/BasketCard.vue";
 import { mapGetters, mapActions } from "vuex";
 import Badge from 'primevue/badge';
+import {createFilterURL} from "@/services/filters";
 
 
 export default defineComponent({
@@ -73,7 +74,9 @@ export default defineComponent({
     props: [],
     data() {
         return {
-            visibleRight: false
+            visibleRight: false,
+            searchText: '',
+            filtersData: null
         }
     },
     methods: {
@@ -81,7 +84,14 @@ export default defineComponent({
         goToBasket(){
             this.$router.push('basket')
             this.visibleRight = false
-        }
+        },
+        async handleFiltersData(code, filtersValue) {
+            if(filtersValue){
+                this.filtersData[code] = filtersValue;
+                this.$emit('handleFiltersData', this.filtersData)
+            }
+        },
+
     },
     mounted() {
         this.loadCartItems()

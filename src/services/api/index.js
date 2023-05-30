@@ -7,6 +7,7 @@ export default class APIService {
                 return res.data;
             })
     }
+
     getBookOrders() {
         return axios.get('/api/orders')
             .then((res) => {
@@ -14,6 +15,7 @@ export default class APIService {
                 return res.data;
             })
     }
+
     getBooks() {
         return axios.get('/api/books')
             .then((res) => {
@@ -23,6 +25,7 @@ export default class APIService {
                 console.error(error)
             })
     }
+
     getSuppliers() {
         return axios.get('/api/suppliers')
             .then((res) => {
@@ -36,7 +39,6 @@ export default class APIService {
     getAllUsers() {
         return axios.get('/api/users')
             .then((res) => {
-                console.log('users', res.data)
                 return res.data;
             })
             .catch(error => {
@@ -47,7 +49,6 @@ export default class APIService {
     getLanguages() {
         return axios.get('/api/languages')
             .then((res) => {
-                console.log('users', res.data)
                 return res.data;
             })
             .catch(error => {

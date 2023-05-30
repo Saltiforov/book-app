@@ -12,11 +12,11 @@
                         </div>
                         <div class="flex align-items-center filter-item">
                             <Checkbox @change="handleFiltersData( 'is_top_sale' ,sales_hits)" v-model="sales_hits" inputId="ingredient1" name="sales_hits" value="true"/>
-                            <label for="ingredient1" class="ml-2"> Хіти продажу </label>
+                            <label for="ingredient2" class="ml-2"> Хіти продажу </label>
                         </div>
                         <div class="flex align-items-center filter-item">
                             <Checkbox @input="handleFiltersData( 'pending' ,pending)" v-model="pending" inputId="ingredient1" name="pending" value="pending"/>
-                            <label for="ingredient1" class="ml-2"> Хіти продажу </label>
+                            <label for="ingredient3" class="ml-2"> Хіти продажу </label>
                         </div>
 
                     </div>
@@ -25,8 +25,8 @@
                             <p >Тип книги</p>
                         </div>
                         <div class="flex align-items-center filter-item">
-                            <Checkbox  @change="handleFiltersData( 'papery' ,book_type)" v-model="book_type.code" inputId="ingredient1" name="papery" value="papery"/>
-                            <label for="ingredient1" class="ml-2">
+                            <Checkbox  @change="handleFiltersData( 'format_type' ,format_type)" v-model="format_type" inputId="ingredient1" name="papery" value="papery"/>
+                            <label for="ingredient4" class="ml-2">
                                 Паперова
                             </label>
                         </div>
@@ -38,7 +38,7 @@
                         <div class="flex align-items-center filter-item">
                             <Checkbox  @change="handleFiltersData( 'availability' ,available)" v-model="available" inputId="ingredient1" name="availability"
                                       value="true"/>
-                            <label for="ingredient1" class="ml-2">
+                            <label for="ingredient5" class="ml-2">
                                 Товари в наявності
                             </label>
                         </div>
@@ -47,25 +47,17 @@
                         <div class="filter-block-title">
                             <p >Мова</p>
                         </div>
-                        <div class="flex align-items-center filter-item">
-                            <Checkbox @change="handleFiltersData( 'language' ,languages)" v-model="languages" inputId="ingredient1" name="ukraine" value="ukraine"/>
-                            <label for="ingredient1" class="ml-2"> Українська </label>
-                        </div>
-                        <div class="flex align-items-center filter-item">
-                            <Checkbox @change="handleFiltersData( 'language' ,languages)" v-model="languages" inputId="ingredient1" name="german" value="german"/>
-                            <label for="ingredient1" class="ml-2"> Німецька </label>
-                        </div>
-                        <div class="flex align-items-center filter-item">
-                            <Checkbox @change="handleFiltersData( 'language' ,languages)" v-model="languages" inputId="ingredient1" name="spanish" value="spanish"/>
-                            <label for="ingredient1" class="ml-2"> Іспанська </label>
-                        </div>
-                        <div class="flex align-items-center filter-item">
-                            <Checkbox @change="handleFiltersData( 'language' ,languages)" v-model="languages" inputId="ingredient1" name="english" value="english"/>
-                            <label for="ingredient1" class="ml-2"> Англійська </label>
-                        </div>
-                        <div class="flex align-items-center filter-item">
-                            <Checkbox @change="handleFiltersData( 'language' ,languages)" v-model="languages" inputId="ingredient1" name="french" value="french"/>
-                            <label for="ingredient1" class="ml-2"> Французька </label>
+
+
+                        <div class="flex align-items-center filter-item" v-for="language in languages">
+                            <Checkbox
+                                @change="handleFiltersData( 'language_type' ,languagesValue)"
+                                v-model="languagesValue"
+                                inputId="ingredient1"
+                                name="ukraine"
+                                :value="language.code"
+                            />
+                            <label for="ingredient6" class="ml-2"> {{ language.name }} </label>
                         </div>
 
                     </div>
@@ -74,11 +66,11 @@
                             <p >Ціна</p>
                         </div>
                         <div class="filter-block_price">
-                            <InputNumber class="input-price" v-model="price.minPrice"  inputId="percent" prefix="Від  " />
-                            <InputNumber  class="input-price" v-model="price.maxPrice" inputId="percent" prefix="До  " />
+                            <InputNumber class="input-price"  @input="handleFiltersData( 'min_price' ,price.minPrice)" v-model="price.minPrice"  inputId="percent" prefix="Від  " />
+                            <InputNumber  class="input-price"  @input="handleFiltersData( 'max_price' ,price.maxPrice)" v-model="price.maxPrice" inputId="percent" prefix="До  " />
                         </div>
                         <div class="price-btn">
-                            <Button @click="handleFiltersData( 'price' ,price)"  label="Застосувати" :disabled="priceBtn" />
+<!--                            <Button @click="handleFiltersData( 'price' ,price)"  label="Застосувати" :disabled="priceBtn" />-->
                         </div>
                     </div>
                 </div>
@@ -90,6 +82,7 @@ import {defineComponent} from 'vue'
 import Checkbox from 'primevue/checkbox';
 import InputNumber from 'primevue/inputnumber';
 import Button from "primevue/button";
+import APIService from "@/services/api";
 
 export default defineComponent({
     name: "BookGoodsAside",
@@ -99,14 +92,16 @@ export default defineComponent({
             discount: null,
             sales_hits: null,
             pending: null,
-            book_type: {title: 'Паперова', code: ''},
-            languages: [],
+            format_type: null,
+            languagesValue: [],
+            languages: null,
             price: {
                 minPrice: '',
                 maxPrice: '',
             },
             priceBtn: false,
             filtersData: {},
+            apiService: null,
         }
     },
     methods: {
@@ -119,6 +114,10 @@ export default defineComponent({
     },
     computed: {
 
+    },
+    async mounted() {
+        this.apiService = new APIService()
+        this.languages = await this.apiService.getLanguages()
     }
 
 })

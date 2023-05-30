@@ -164,7 +164,7 @@ export default {
                 price: this.price,
                 publication_date: this.formatDate(this.publication_date),
                 format_type: this.format_type[0].code,
-                language_type: this.language_type[0].code,
+                language_type: this.language_type,
                 user_id: this.publisher_id.code,
                 sup_id: this.sup_id.code,
                 author: this.author[0].name,

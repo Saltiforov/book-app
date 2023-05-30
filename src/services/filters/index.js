@@ -1,39 +1,36 @@
-
+import axios from 'axios'
 
 const BASE_URL = 'http://127.0.0.1:5173';
 
 const routes = {
-    systemTasks: '/api/system-tasks',
+    books: '/api/books',
 }
 
 export async function createFilterURL(filtersObject, route) {
     const params = new URLSearchParams();
     console.log('filtersObject', filtersObject)
-    // if (filtersObject.special_price) {
-    //     params.append('special_price', filtersObject.special_price[0]);
-    // }
-    //
-    // if (filtersObject.is_top_sale) {
-    //         params.append('is_top_sale', filtersObject.is_top_sale[0]);
-    // }
-    //
-    // if (filtersObject.pending) {
-    //     params.append('pending', filtersObject.pending[0]);
-    // }
-
-    if (filtersObject.papery) {
-        console.log(filtersObject.papery)
-        params.append('book_type', filtersObject.papery.code[0]);
+    if (filtersObject.format_type) {
+        console.log(filtersObject.format_type)
+        params.append('format_type', filtersObject.format_type[0]);
     }
 
-    if (filtersObject.availability) {
-        console.log(filtersObject.availability)
-        params.append('availability', filtersObject.availability[0]);
+    if (filtersObject.searchQuery) {
+        console.log(filtersObject.format_type)
+        params.append('searchQuery', filtersObject.format_type[0]);
     }
 
-    if (filtersObject.language && filtersObject.language.length > 0) {
-        const languages = filtersObject.language.map(item => item).join(',');
-        params.append('language', languages);
+
+    if (filtersObject.language_type && filtersObject.language_type.length > 0) {
+        const languages = filtersObject.language_type.map(item => item).join(',');
+        params.append('language_type', languages);
+    }
+
+    if (filtersObject.min_price) {
+        params.append('min_price', filtersObject.min_price);
+    }
+
+    if (filtersObject.max_price) {
+        params.append('max_price', filtersObject.max_price);
     }
 
     const queryString = params.toString();
@@ -41,10 +38,10 @@ export async function createFilterURL(filtersObject, route) {
 
     console.log(url)
 
-    // return axios
-    //     .get(url)
-    //     .then(response => {
-    //         return response.data;
-    //     })
-    //     .catch(e => console.log(e));
+     return axios
+         .get(url)
+         .then(response => {
+            return response.data;
+         })
+         .catch(e => console.log(e));
 }

@@ -36,15 +36,12 @@ export default defineComponent({
         }
     },
     methods: {
-        // ...mapGetters(['getProductList',]),
         async handleFiltersData(filtersData) {
-            this.systemTasks = await createFilterURL(filtersData, 'systemTasks');
+            this.books = await createFilterURL(filtersData, 'books');
         }
     },
     computed: {
-      // productsCount() {
-      //     return this.getProductListLength()
-      // }
+
     },
     async mounted() {
         // this.books = this.getProductList()
