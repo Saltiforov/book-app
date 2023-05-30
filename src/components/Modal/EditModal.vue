@@ -141,6 +141,7 @@ export default {
                 format_type: this.taskData.format_type['code'],
                 user_id: this.taskData.user_id['name'],
                 sup_id: this.taskData.sup_id['code'],
+                book_id: this.taskData.book_id,
             })
             console.log()
             this.$emit('close')
