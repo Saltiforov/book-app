@@ -184,6 +184,8 @@ export default {
         this.taskData = {
           ...newVal,
           user: this.users && this.users.find(item => item.user_id === newVal.user_id),
+            delivery_city: this.delivery_cities.find(city => city['name'] === newVal.delivery_city),
+            delivery_res: this.delivery_res.find(res => newVal.delivery_res === res.name)
         };
       },
     },
