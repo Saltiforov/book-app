@@ -5,7 +5,7 @@
                 @handleFiltersData="handleFiltersData"
             />
             <div class="wrapper_main">
-                <div class="quantity-books">{{ productsCount }} товари</div>
+                <div class="quantity-books">{{ this.books.length || '0' }} товари</div>
                 <div class="wrapper-main_content">
                     <BookCard
                             v-for="book in books"

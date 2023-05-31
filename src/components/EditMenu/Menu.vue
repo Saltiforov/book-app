@@ -1,6 +1,6 @@
 <template>
     <div class="card flex justify-content-center" @click="toggle">
-        1
+        <img class="edit-image" src="../../assets/dots.png" alt="">
         <Menu ref="menu" :model="items" :popup="true"/>
     </div>
 </template>
@@ -47,5 +47,10 @@ export default {
 }
 .p-menu p-component p-menu-overlay p-ripple-disabled{
     background: red;
+}
+.edit-image{
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
 }
 </style>

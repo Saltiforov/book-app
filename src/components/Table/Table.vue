@@ -12,7 +12,7 @@
           <Column
                   v-if="editColumn"
                   field="quantity"
-                  header="Edit"
+                  :header="editConfig.header"
                   :style="editConfig.style"
           >
               <template #body="{ data }">
@@ -77,8 +77,16 @@ export default defineComponent({
         },
         handledDelete(data) {
             this.$emit('handledDelete', data)
+        },
+        extractSegment(str) {
+            const regex = /^([a-zA-Z0-9]+)/;
+            const match = str.match(regex);
+            return match ? match[1] : '';
         }
     },
+    computed: {
+
+    }
 
 })
 </script>
@@ -86,6 +94,10 @@ export default defineComponent({
 <style scoped>
 
 :deep(.p-datatable .p-datatable-thead > tr > th){
+    background: #000;
+    color: white;
+}
+:deep(.p-datatable .p-sortable-column.p-highlight:hover){
     background: #000;
     color: white;
 }

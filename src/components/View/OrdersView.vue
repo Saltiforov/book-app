@@ -48,54 +48,54 @@ export default {
       tableConfig: [
         {
           code: 'first_name',
-          header: 'Name',
+          header: "Ім'я",
           sortable: true,
           style: 'width: 6rem'
         },
         {
           code: 'last_name',
-          header: 'last_name',
+          header: 'Прізвище',
           sortable: true,
-          style: 'width: 6rem',
+          style: 'width: 3rem',
         },
         {
-          header: 'Email Address',
+          header: 'Адреса електронної пошти',
           code: 'email',
           sortable: true,
-          style: 'width: 6rem',
+          style: 'width: 10rem',
         },
         {
-          header: 'Phone Number',
+          header: 'Номер телефону',
           sortable: true,
-          style: 'width: 6rem',
+          style: 'width: 8rem',
           code: 'phone'
         },
         {
-          header: 'delivery_city',
+          header: 'Місто доставки',
           sortable: true,
           style: 'width: 8rem',
           code: 'delivery_city'
         },
         {
-          header: 'delivery_res',
+          header: 'Номер відділення',
           sortable: true,
           style: 'width: 8rem',
           code: 'delivery_res'
         },
         {
-          header: 'order_id',
+          header: 'ID замовлення',
           sortable: true,
           style: 'width: 8rem',
           code: 'order_id'
         },
         {
-          header: 'user_id',
+          header: 'Ідентифікатор користувача',
           sortable: true,
           style: 'width: 8rem',
           code: 'user_id'
         },
         {
-          header: 'books',
+          header: 'Книги',
           sortable: true,
           style: 'width: 8rem',
           code: 'books'
@@ -108,7 +108,7 @@ export default {
       isVisible: null,
       filtersData: null,
       editItemData: null,
-      editConfig: {style: 'width: 6rem'},
+      editConfig: {style: 'width: 6rem', header: 'Редагування'},
       users: null
     }
   },

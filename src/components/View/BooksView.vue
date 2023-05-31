@@ -60,54 +60,62 @@ export default {
             tableConfig: [
                 {
                     code: 'title',
-                    header: 'title',
+                    header: 'Назва',
                     sortable: true,
-                    style: 'width: 6rem'
+                    style: 'width: 8rem'
                 },
                 {
                     code: 'price',
-                    header: 'price',
+                    header: 'Ціна',
                     sortable: true,
                     style: 'width: 6rem',
                 },
                 {
-                    header: 'publication_date',
+                    header: 'Дата публікації',
                     code: 'publication_date',
                     sortable: true,
                     style: 'width: 5rem',
                 },
                 {
-                    header: 'format_type',
+                    header: 'Автор',
+                    sortable: true,
+                    style: 'width: 3rem',
+                    code: 'author'
+                },
+                {
+                    header: 'Тип формату',
                     sortable: true,
                     style: 'width: 8rem',
                     code: 'format_type'
                 },
                 {
-                    header: 'language_type',
+                    header: 'Мова',
                     sortable: true,
-                    style: 'width: 5rem',
+                    style: 'width: 2rem',
                     code: 'language_type'
                 },
                 {
-                    header: 'book_id',
+                    header: 'Ідентифікатор книги',
                     sortable: true,
                     style: 'width: 10rem',
                     code: 'book_id'
                 },
                 {
-                    header: 'user_id',
+                    header: 'Ідентифікатор користувача',
                     sortable: true,
-                    style: 'width: 10rem',
+                    style: 'width: 12rem',
                     code: 'user_id'
                 },
                 {
-                    header: 'sup_id',
+                    header: 'ID постачальника',
                     sortable: true,
-                    style: 'width: 6rem',
+                    style: 'width: 3rem',
                     code: 'sup_id'
                 },
+
+
             ],
-            editConfig: {style: 'width: 6rem'},
+            editConfig: {style: 'width: 6rem', header: 'Редагування'},
             visible: false,
             tableData: [],
             cities: [
@@ -175,13 +183,6 @@ export default {
     async mounted() {
         this.apiService = new APIService()
         this.tableData = await this.apiService.getBooks()
-        // this.tableData = this.tableData.map(item => {
-        //     return {
-        //         ...item,
-        //         user_id: this.extractSegment(item.user_id),
-        //         book_id: this.extractSegment(item.book_id),
-        //     }
-        // })
         this.languages = await this.apiService.getLanguages()
         this.usersList = await this.apiService.getAllUsers()
         this.supIdList = await this.apiService.getSuppliers()
@@ -193,8 +194,8 @@ export default {
         })
         this.usersList = this.usersList.map(user => {
             return {
-                name: user.user_id,
-                code: user.user_name
+                name: user.user_name,
+                code: user.user_id
             }
         })
     }

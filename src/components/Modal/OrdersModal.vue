@@ -1,7 +1,7 @@
 <template>
   <div className="VOrderModal" v-show="isVisible">
     <div className="VOrderModal-window">
-      <div className="VOrderModal-window__title">Edit order item</div>
+      <div className="VOrderModal-window__title">Редагувати замовлення</div>
       <span className="closeBtn">
               <img
                   src=""
@@ -13,7 +13,7 @@
       <div className="VOrderModal-window__inputs">
 
         <div className="form__element">
-          <div class="flex flex-column gap-2 mb-4">
+          <div class="flex flex-column gap-2 mb-5">
                            <span class="p-float-label">
                               <InputText class="form__element-item" id="username" v-model="taskData.first_name"/>
                               <label for="username">Ім*я</label>
@@ -50,14 +50,14 @@
                       </span>
         </div>
         <div className="form__element client-info__phone">
-                     <span class="p-float-label">
+                     <span class="p-float-label ">
                         <Dropdown
                             v-model="taskData.user"
                             editable
                             :options="users"
                             optionLabel="user_name"
                             placeholder="Оберіть назву міста"
-                            class="w-full md:w-14rem "
+                            class="w-full md:w-14rem form__element-user"
                         />
                       </span>
         </div>
@@ -70,7 +70,7 @@
               <Dropdown
                   v-model="taskData.delivery_city"
                   editable
-                  :options="cities"
+                  :options="delivery_cities"
                   optionLabel="name"
                   placeholder="Оберіть назву міста"
                   class="w-full md:w-14rem "
@@ -80,7 +80,7 @@
               <Dropdown
                   v-model="taskData.delivery_res"
                   editable
-                  :options="cities"
+                  :options="delivery_res"
                   optionLabel="name"
                   placeholder="Оберіть номер відділення"
                   class="w-full md:w-14rem"
@@ -132,14 +132,26 @@ export default {
         delivery_res: '',
         user: '',
       },
-      cities: [
-        {name: 'New York', code: 'NY'},
-        {name: 'Rome', code: 'RM'},
-        {name: 'London', code: 'LDN'},
-        {name: 'Istanbul', code: 'IST'},
-        {name: 'Paris', code: 'PRS'}
-      ],
-      optionStatus: ['New', 'Complete', 'In progress'],
+        delivery_cities: [
+            { name: 'Київ', code: 'Kyiv' },
+            { name: 'Харків', code: 'Kharkiv' },
+            { name: 'Одеса', code: 'Odesa' },
+            { name: 'Суми', code: 'Sumy' },
+            { name: 'Кременчук', code: 'Kremenchuk' },
+            { name: 'Ужгород', code: 'Uzhhorod' },
+            { name: 'Бровари', code: 'Breweries' },
+            { name: 'Рівне', code: 'Rivne' },
+        ],
+        delivery_res: [
+            { name: 'Відділення №1', code: 'number1' },
+            { name: 'Відділення №2', code: 'number2' },
+            { name: 'Відділення №3', code: 'number3' },
+            { name: 'Відділення №4', code: 'number4' },
+            { name: 'Відділення №5', code: 'number5' },
+            { name: 'Відділення №6', code: 'number6' },
+            { name: 'Відділення №7', code: 'number7' },
+            { name: 'Відділення №8', code: 'number8' },
+        ],
 
     };
   },
@@ -185,10 +197,18 @@ export default {
 
 <style lang="scss" scoped>
 
+
+
+
+
+
+.form__element-user{
+  width: 100% !important;
+}
+
 .delivery-adress {
-  width: 900px;
-  margin: 0 auto;
   padding-bottom: 40px;
+  width: 100%;
 }
 
 .delivery-wrapper {
@@ -207,7 +227,7 @@ export default {
 }
 
 .delivery-item {
-  width: 430px;
+
 }
 
 .delivery-item div {

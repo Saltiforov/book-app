@@ -31,9 +31,11 @@
                         <p>{{this.book.price}} грн</p>
                     </div>
 
-                    <p  class="availability">В наявності</p>
-                    <p class="status-text" >Доставка по Києву кур'єром завтра</p>
-<!--                    <p v-else class="unavailability">Не в наявності</p>-->
+                    <div v-if="book.available" class="available--book">
+                        <p class="status-text"> В наявності</p>
+                        <p  class="status-text" >Доставка по Києву кур'єром завтра</p>
+                    </div>
+                    <p v-else class="unavailability">Не в наявності</p>
                 </div>
 
                 <div class="card-buttons">

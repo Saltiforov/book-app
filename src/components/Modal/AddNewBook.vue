@@ -138,12 +138,6 @@ export default {
                 { name: 'Електронна', code: 'electronic' },
             ],
             languageOptions: null,
-            authorOptions: [
-                { name: 'Ліна Костенко', code: 'lina kostenko' },
-                { name: 'Елізабет Ґілберт', code: 'elizabet gilbert' },
-                { name: 'Ерік Берн', code: 'eric burn' },
-                { name: 'Іван Багряний', code: 'ivan bagryany' },
-            ],
             publisherOptions: null,
             supOptions: null,
             apiService: null,
@@ -161,11 +155,11 @@ export default {
                 title: this.title,
                 price: this.price,
                 publication_date: this.formatDate(this.publication_date),
-                format_type: this.format_type.code,
+                format_type: this.format_type.name,
                 language_type: this.language_type,
                 user_id: this.publisher_id.code,
                 sup_id: this.sup_id.code,
-                author: this.author.code,
+                author: this.author,
             }
             axios.post('/api/new-book', book)
            this.$emit('addNewBook')

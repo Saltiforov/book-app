@@ -1,7 +1,7 @@
 <template>
     <div className="VOrderModal" v-show="isVisible">
         <div className="VOrderModal-window">
-            <div className="VOrderModal-window__title">Edit book data</div>
+            <div className="VOrderModal-window__title">Редагувати дані книги</div>
             <span className="closeBtn">
               <img
                       src=""
@@ -22,7 +22,7 @@
                     <div class="flex flex-column gap-2 form__element-item">
                            <span class="p-float-label">
                               <InputText class="form__element-item" id="username" v-model="taskData.price"/>
-                              <label for="username">Цена</label>
+                              <label for="username">Ціна</label>
                           </span>
                     </div>
                 </div>
@@ -31,7 +31,7 @@
                 <div className="form__element client-info__phone">
                      <span class="p-float-label">
                           <Calendar class="modal-calendar" v-model="taskData.publication_date" inputId="birth_date" />
-                          <label for="birth_date">Publication Date</label>
+                          <label for="birth_date">Дата публікації</label>
                       </span>
                 </div>
                 <div className="form__element date-row">
@@ -41,7 +41,7 @@
                                     v-model="taskData.language_type"
                                     :options="languages"
                                     optionLabel="name"
-                                    placeholder="Select a language"
+                                    placeholder="Виберіть мову"
                                     class="w-full md:w-14rem language-type"
                             />
                         </div>
@@ -54,11 +54,18 @@
                                     v-model="taskData.format_type"
                                     :options="bookType"
                                     optionLabel="name"
-                                    placeholder="Select a type"
+                                    placeholder="Виберіть тип"
                                     class="w-full md:w-14rem language-type book-id__item"
                             />
                         </div>
                     </div>
+                </div>
+
+                <div class="flex flex-column gap-2 mb-4 form__element-item">
+                           <span class="p-float-label">
+                              <InputText class="form__element-item" id="username" v-model="taskData.available"/>
+                              <label for="username">Наявність</label>
+                          </span>
                 </div>
 
                 <span className="form__element p-float-label">
@@ -66,7 +73,7 @@
                             v-model="taskData.user_id"
                             :options="usersList"
                             optionLabel="name"
-                            placeholder="Change user id"
+                            placeholder="Змінити ідентифікатор користувача"
                             class="w-full md:w-14rem book-id__item"
                     />
                 </span>
@@ -75,7 +82,7 @@
                               v-model="taskData.sup_id"
                               :options="supIdList"
                               optionLabel="name"
-                              placeholder="Change sup id"
+                              placeholder="Змінити ідентифікатор постачальника"
                               class="w-full md:w-14rem book-id__item"
                       />
                 </span>
@@ -122,6 +129,7 @@ export default {
                 book_id: '',
                 user_id: '',
                 sup_id: '',
+                available: ''
             },
             optionStatus: ['New', 'Complete', 'In progress'],
         };
@@ -139,7 +147,7 @@ export default {
                 publication_date: publicationDate,
                 language_type: this.taskData.language_type['code'],
                 format_type: this.taskData.format_type['code'],
-                user_id: this.taskData.user_id['name'],
+                user_id: this.taskData.user_id['code'],
                 sup_id: this.taskData.sup_id['code'],
                 book_id: this.taskData.book_id,
             })
@@ -154,8 +162,8 @@ export default {
                 this.taskData = {
                     ...newVal,
                     language_type: this.languages.find(lang => lang['code'] === newVal.language_type),
-                    format_type: this.bookType.find(book => book['code'] === newVal.format_type),
-                    user_id: this.usersList && this.usersList.find(item => item.name === newVal.user_id),
+                    format_type: this.bookType.find(book => book['name'] === newVal.format_type),
+                    user_id: this.usersList && this.usersList.find(item => item.code === newVal.user_id),
                     sup_id: this.supIdList.find(supp => supp['code'] === newVal.sup_id)
                 };
             },
@@ -176,6 +184,14 @@ export default {
 }
 :deep(.p-float-label label) {
   color: #758DDD;
+}
+:deep(.p-button:enabled:hover) {
+   background: #2d079d !important;
+   border-radius: 10px !important;
+}
+:deep(.p-button:enabled) {
+  background: #2d079d;
+   border-radius: 10px;
 }
 
 .text-area {

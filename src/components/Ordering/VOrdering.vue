@@ -30,7 +30,7 @@
                     <div class="delivery-item">
                         <Dropdown
                                 v-model="contactData.delivery_city"
-                                editable :options="cities"
+                                editable :options="delivery_cities"
                                 optionLabel="name"
                                 placeholder="Оберіть назву міста"
                                 class="w-full md:w-14rem "
@@ -39,7 +39,7 @@
                     <div class="delivery-item">
                         <Dropdown
                                 v-model="contactData.delivery_res"
-                                editable :options="cities"
+                                editable :options="delivery_res"
                                 optionLabel="name"
                                 placeholder="Оберіть номер відділення"
                                 class="w-full md:w-14rem"
@@ -80,12 +80,25 @@ export default defineComponent({
                 comment: '',
                 books: this.extractValuesById(this.getBasketItems(), 'book_id') ,
             },
-            cities: [
-                { name: 'New York', code: 'NY' },
-                { name: 'Rome', code: 'RM' },
-                { name: 'London', code: 'LDN' },
-                { name: 'Istanbul', code: 'IST' },
-                { name: 'Paris', code: 'PRS' }
+            delivery_cities: [
+                { name: 'Київ', code: 'Kyiv' },
+                { name: 'Харків', code: 'Kharkiv' },
+                { name: 'Одеса', code: 'Odesa' },
+                { name: 'Суми', code: 'Sumy' },
+                { name: 'Кременчук', code: 'Kremenchuk' },
+                { name: 'Ужгород', code: 'Uzhhorod' },
+                { name: 'Бровари', code: 'Breweries' },
+                { name: 'Рівне', code: 'Rivne' },
+            ],
+            delivery_res: [
+                { name: 'Відділення №1', code: 'number1' },
+                { name: 'Відділення №2', code: 'number2' },
+                { name: 'Відділення №3', code: 'number3' },
+                { name: 'Відділення №4', code: 'number4' },
+                { name: 'Відділення №5', code: 'number5' },
+                { name: 'Відділення №6', code: 'number6' },
+                { name: 'Відділення №7', code: 'number7' },
+                { name: 'Відділення №8', code: 'number8' },
             ],
             selectedCity: null,
             selectedDepartment: null,
