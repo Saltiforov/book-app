@@ -4,12 +4,11 @@
         <div class="books-search">
 
             <Button class="add-book" label="Додати книгу" @click="visible = true"/>
-            <span class="books-search__input">Пошук</span>
             <span class="p-input-icon-right"
                   style="margin-right: 100px"
             >
                     <i class="pi pi-search"/>
-                    <InputText @input="handleFiltersData()" v-model="booksSearch" placeholder="Search"/>
+                    <InputText @input="handleFiltersData()" v-model="booksSearch" placeholder="Пошук"/>
             </span>
             <AddNewBookPopup
                     :is-visible="visible"
@@ -50,10 +49,11 @@ import AddNewBookPopup from "../Modal/AddNewBook.vue";
 import APIService from "../../services/api";
 import EditModal from "@/components/Modal/EditModal.vue";
 import {createFilterURL} from "@/services/filters";
+import moment from "moment";
 
 export default {
     name: "VSignUp",
-    components: {AddNewBookPopup, InputText, Button, Table, Dropdown, EditModal},
+    components: {AddNewBookPopup, InputText, Button, Table, Dropdown, EditModal, moment},
     props: {},
     data() {
         return {
@@ -175,7 +175,8 @@ export default {
             const regex = /^([a-zA-Z0-9]+)/;
             const match = str.match(regex);
             return match ? match[1] : '';
-        }
+        },
+
 
 
     },
@@ -183,6 +184,12 @@ export default {
     async mounted() {
         this.apiService = new APIService()
         this.tableData = await this.apiService.getBooks()
+        this.tableData = this.tableData.map(data => {
+            return {
+                ...data,
+                publication_date: moment(data.publication_date).subtract(10, 'days').calendar()
+            }
+        })
         this.languages = await this.apiService.getLanguages()
         this.usersList = await this.apiService.getAllUsers()
         this.supIdList = await this.apiService.getSuppliers()

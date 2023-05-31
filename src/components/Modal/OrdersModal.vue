@@ -93,14 +93,14 @@
 
       <div className="VOrderModal-window__btn">
         <Button
-            label="Cancel"
+            label="Скасувати"
             style="background-color: grey"
-            class="p-button-raised cancel-btn"
+            class="p-button-raised cancel-changes__bnt"
             @click="this.$emit('close')"
         />
         <Button
-            label="Save"
-            class="p-button-raised"
+            label="Зберегти"
+            class="p-button-raised save-changes__btn"
             @click="save"
         />
       </div>
@@ -348,6 +348,10 @@ export default {
   border: 1px solid #2196F3;
   border-radius: 5px;
   width: 163px;
+}
+
+.save-changes__btn:hover{
+  background: #1E39CE !important;
 }
 
 .close-icon {

@@ -1,7 +1,7 @@
 <template>
     <div class="VOrderModal" v-show="isVisible">
         <div class="VOrderModal-window">
-            <div class="VOrderModal-window__title">ADD NEW BOOK</div>
+            <div class="VOrderModal-window__title">ДОДАТИ НОВУ КНИГУ</div>
             <span class="closeBtn">
               <img
                       src=""
@@ -17,7 +17,7 @@
                         <div class="flex flex-column gap-2">
                            <span class="p-float-label">
                               <InputText id="username" v-model="title"/>
-                              <label for="username">Title name</label>
+                              <label for="username">Назва книги</label>
                           </span>
                         </div>
                     </div>
@@ -25,7 +25,7 @@
                         <div class="flex flex-column gap-2">
                            <span class="p-float-label">
                               <InputNumber id="number-input" v-model="price" />
-                              <label for="number-input">Price</label>
+                              <label for="number-input">Ціна</label>
                           </span>
                         </div>
                     </div>
@@ -36,7 +36,7 @@
                     <div class="client-info__name">
                        <span class="p-float-label">
                           <Calendar class="modal-calendar" v-model="publication_date" inputId="birth_date" />
-                          <label for="birth_date">Publication Date</label>
+                          <label for="birth_date">Дата публікації</label>
                       </span>
                     </div>
                 </div>
@@ -47,7 +47,7 @@
                                 v-model="format_type"
                                 :options="formatTypeOptions"
                                 optionLabel="name"
-                                placeholder="Select s Publisher"
+                                placeholder="Виберіть формат книги"
                                 class="w-full md:w-14rem format-type"
                         />
                     </div>
@@ -56,7 +56,7 @@
                                 v-model="language_type"
                                 :options="languageOptions"
                                 optionLabel="name"
-                                placeholder="Select s Publisher"
+                                placeholder="Виберіть мову книги"
                                 class="w-full md:w-14rem language-type"
                         />
                     </div>
@@ -64,12 +64,12 @@
                         <div class="flex flex-column gap-2">
                            <span class="p-float-label">
                               <InputText id="author" v-model="author"/>
-                              <label for="username">Author name</label>
+                              <label for="username">Ім'я автора</label>
                           </span>
                         </div>
                     </div>
-
                 </div>
+
 
                 <div class="modal-dropdowns">
                     <div class="modal-dropdowns__item">
@@ -77,7 +77,7 @@
                                 v-model="publisher_id"
                                 :options="publisherOptions"
                                 optionLabel="name"
-                                placeholder="Select s Publisher"
+                                placeholder="Виберіть видавця"
                                 class="w-full md:w-14rem"
                         />
                     </div>
@@ -86,24 +86,29 @@
                                 v-model="sup_id"
                                 :options="supOptions"
                                 optionLabel="name"
-                                placeholder="Select a Sup"
+                                placeholder="Виберіть постачальника"
                                 class="w-full md:w-14rem"
                         />
                     </div>
                 </div>
 
+                <div class="upload-image__block">
+                    <VUploadImage/>
+                </div>
+
+
             </div>
             <div class="VOrderModal-window__btn">
                 <VButton
-                        label="Create new order"
-                        class="p-button-raised"
-                        @click="addNewBook"
+                        label="Скасувати"
+                        style="background-color: grey"
+                        class="p-button-raised cancel-newbook__btn"
+                        @click=" this.$emit('clickCancelBtn',)"
                 />
                 <VButton
-                        label="Cancel"
-                        style="background-color: grey"
-                        class="p-button-raised cancel-btn"
-                        @click=" this.$emit('clickCancelBtn',)"
+                        label="Створити нову книгу"
+                        class="p-button-raised create-newbook__btn"
+                        @click="addNewBook"
                 />
             </div>
         </div>
@@ -114,14 +119,13 @@
 <script>
 
 import axios from "axios";
-import InputNumber from 'primevue/inputnumber';
-import InputText from "primevue/inputtext";
+import VUploadImage from "@/components/VUploadImage/VUploadImage.vue";
 import Calendar from 'primevue/calendar';
 import APIService from "@/services/api";
 
 export default {
     name: "AddNewBookPopup",
-    components: { InputNumber, InputText, Calendar,   },
+    components: { Calendar, VUploadImage },
     props: ['isVisible', 'workers', 'partList', 'userRequests'],
     data() {
         return {
@@ -193,6 +197,11 @@ export default {
 <style lang="scss" scoped>
 
 
+
+.upload-image__block{
+  margin-top: 20px;
+  margin-bottom: 5px;
+}
 :deep(.p-float-label label) {
   color: grey;
 }
@@ -260,16 +269,16 @@ export default {
     background: white;
     box-shadow: 0 8px 46px rgba(0, 0, 0, 0.25);
     border-radius: 19px;
-    margin: 150px auto;
+    margin: 20px auto;
     display: flex;
     flex-direction: column;
     text-align: center;
     padding: 20px;
     &__btn {
-      width: 400px;
+      width: 425px;
       display: flex;
       justify-content: space-between;
-      margin: 0 auto 45px;
+      margin: 0 auto 5px;
     }
 
     &__title {
@@ -279,8 +288,7 @@ export default {
       font-size: 24px;
       line-height: 33px;
       color: black;
-      padding-top: 30px;
-      padding-bottom: 20px;
+      padding-bottom: 10px;
     }
 
     &__inputs {
@@ -288,7 +296,7 @@ export default {
       flex-direction: column;
       align-items: center;
       width: 500px;
-      margin: 30px auto;
+      margin: 0px auto 20px;
     }
   }
 }
@@ -299,17 +307,21 @@ export default {
   box-shadow: 0 8px 46px rgba(0, 0, 0, 0.1);
 }
 
-:deep(.p-button) {
-  background: #1E39CE;
-  border: 1px solid #2196F3;
-  border-radius: 5px;
-  width: 163px;
+
+.cancel-newbook__btn:hover{
+  border-radius: 5px !important;
+  background-color: grey;
+  border-radius: 3px !important;
 }
-:deep(.p-button:enabled:hover) {
+.create-newbook__btn{
   background: #1E39CE;
   border: 1px solid #2196F3;
   border-radius: 5px;
-  width: 163px;
+}
+.create-newbook__btn:hover{
+  background: #1E39CE !important;
+  border: 1px solid #2196F3 !important;
+  border-radius: 5px !important;
 }
 
 .close-icon {

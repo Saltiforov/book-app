@@ -82,7 +82,7 @@ export default defineComponent({
             const regex = /^([a-zA-Z0-9]+)/;
             const match = str.match(regex);
             return match ? match[1] : '';
-        }
+        },
     },
     computed: {
 

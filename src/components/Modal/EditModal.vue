@@ -90,14 +90,14 @@
 
             <div className="VOrderModal-window__btn">
                 <Button
-                        label="Cancel"
+                        label="Скасувати"
                         style="background-color: grey"
-                        class="p-button-raised cancel-btn"
+                        class="p-button-raised cancel-changes__bnt"
                         @click="this.$emit('close')"
                 />
                 <Button
-                        label="Save"
-                        class="p-button-raised"
+                        label="Зберегти"
+                        class="p-button-raised save-changes__bnt"
                         @click="save"
                 />
             </div>
@@ -176,6 +176,22 @@ export default {
 <style lang="scss" scoped>
 
 
+.save-changes__bnt{
+  background: #1E39CE;
+  width: 163px;
+}
+.save-changes__bnt:hover{
+  background: #1E39CE !important;
+  border-radius: 4px !important;
+}
+
+.cancel-changes__bnt{
+  width: 163px;
+}
+.cancel-changes__bnt:hover{
+  border-radius: 4px !important;
+}
+
 .book-id__item{
   width: 100% !important;
 }
@@ -183,15 +199,7 @@ export default {
   width: 100%;
 }
 :deep(.p-float-label label) {
-  color: #758DDD;
-}
-:deep(.p-button:enabled:hover) {
-   background: #2d079d !important;
-   border-radius: 10px !important;
-}
-:deep(.p-button:enabled) {
-  background: #2d079d;
-   border-radius: 10px;
+  font-size: 15px !important;
 }
 
 .text-area {
@@ -268,12 +276,7 @@ export default {
   box-shadow: 0 8px 46px rgba(0, 0, 0, 0.1);
 }
 
-:deep(.p-button) {
-  background: #1E39CE;
-  border: 1px solid #2196F3;
-  border-radius: 5px;
-  width: 163px;
-}
+
 
 .close-icon {
   box-sizing: border-box;

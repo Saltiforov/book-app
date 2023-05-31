@@ -69,14 +69,16 @@
       </div>
 
       <div class="filter-block">
-        <div class="filter-block-title ">
+          <h4 class="block-prices__title">Ціна</h4>
+        <div class="block-prices ">
+
           <div class="max-price">
-            <span style="margin-right: 5px;">Максимальна ціна :</span>
-            <span>{{ this.priceRange ? this.priceRange[0] : 0 }}</span>
+            <span class="max-price__text">від:</span>
+            <span>{{ this.priceRange ? this.priceRange[0] : 0 }} <span style="font-size: 15px">₴</span></span>
           </div>
           <div class="min-price">
-            <span style="margin-right: 5px;">Мінімальна ціна :</span>
-            <span>{{ this.priceRange ? this.priceRange[1] : 100 }}</span>
+            <span  class="min-price__text">до:</span>
+            <span>{{ this.priceRange ? this.priceRange[1] : 100 }}<span style="font-size: 15px">₴</span></span>
           </div>
         </div>
         <div class="filter-block_price">
@@ -163,51 +165,62 @@ export default defineComponent({
 
 <style scoped>
 
-.quantity-books {
-  padding: 20px 40px 10px 40px;
-  font-family: inherit;
-  font-weight: 500;
-  font-size: 20px;
-  line-height: 100%;
-  font-style: normal;
+
+.max-price__text, .min-price__text{
+    margin-right: 5px;
+    font-family: "Mabry Pro", sans-serif;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 100%;
+    font-style: normal;
+    color: #626B77;
+}
+.block-prices__title{
+    display: block;
+    width: 100%;
+    height: auto;
+    color: #222;
+    font-family: "Mabry Pro", sans-serif;
+    font-weight: 500;
+    font-size: 17px;
+    line-height: 100%;
+    font-style: normal;
+    margin-bottom: 10px;
+}
+.p-slider.p-slider-horizontal{
+    height: 0.6rem;
+    border-radius: 10px;
+}
+:deep(.p-slider-handle:hover){
+    background: white !important;
 }
 
-.book-goods {
-  background: #dad7d7;
-  height: auto;
+
+.max-price{
+    font-size: 18px;
+}
+.min-price{
+    font-size: 18px;
 }
 
-.wrapper_main {
-  background: white;
-  width: 1250px;
-  border-radius: 10px;
-
+.block-prices{
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: space-between;
+}
+.filter-block-title{
+    margin-bottom: 15px;
+    display: block;
+    width: 100%;
+    height: auto;
+    color: #222;
+    font-family: "Mabry Pro", sans-serif;
+    font-weight: 500;
+    font-size: 15px;
+    line-height: 100%;
+    font-style: normal;
 }
 
-.wrapper-main_content {
-  padding: 10px 0px;
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  grid-gap: 10px;
-  justify-items: center;
-}
-
-.wrapper {
-  width: 1600px;
-  margin: 30px auto;
-  height: 100%;
-  padding: 20px 20px;
-  display: flex;
-  justify-content: space-between;
-}
-
-.filter-block-title {
-  margin-bottom: 10px;
-}
-
-.filter-block-title p {
-  font-size: 18px;
-}
 
 .wrapper_aside {
   width: 270px;
@@ -222,6 +235,12 @@ export default defineComponent({
 
 .filter-item {
   margin-bottom: 15px;
+    color: #626B77;
+    font-family: "Mabry Pro", sans-serif;
+    font-weight: 400;
+    font-size: 15px;
+    line-height: 120%;
+    font-style: normal;
 }
 
 .search_publisher {

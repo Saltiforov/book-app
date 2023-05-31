@@ -15,14 +15,14 @@ export default {
         return {
             items: [
                 {
-                    label: 'Edit',
+                    label: 'Редагувати',
                     icon: 'pi pi-plus',
                     command: () => {
                         this.$emit('handleEditTask', {...this.editTaskData})
                     }
                 },
                 {
-                    label: 'Delete',
+                    label: 'Видалити',
                     icon: 'pi pi-times',
                     command: () => {
                         this.$emit('handledDelete', this.editTaskData)
