@@ -6,7 +6,7 @@
                     <div class="book-poster">
                         <span class="book-id">{{this.extractSubstringId}}</span>
                         <a href="">
-                            <img src="https://static.yakaboo.ua/media/cloudflare/product/webp/600x840/i/m/img_0239_6.jpg" alt="" class="book-img-item">
+                            <img :src="getBase64Image(book.image)" alt="Book Image" class="book-img-item">
                         </a>
                         <div class="book-description">
                         <span
@@ -81,7 +81,13 @@ export default defineComponent({
         redirectToBasket(book) {
             this.ADD_TO_BASKET(book)
             this.$router.push('/basket')
+        },
+      getBase64Image(image) {
+        if (image) {
+          return `data:image/jpeg;base64, ${image}`;
         }
+        return null;
+      }
     },
     mounted() {
 
