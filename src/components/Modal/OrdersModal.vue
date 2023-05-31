@@ -53,10 +53,9 @@
                      <span class="p-float-label ">
                         <Dropdown
                             v-model="taskData.user"
-                            editable
                             :options="users"
                             optionLabel="user_name"
-                            placeholder="Оберіть назву міста"
+                            placeholder="Оберіть паблішера"
                             class="w-full md:w-14rem form__element-user"
                         />
                       </span>
@@ -69,7 +68,6 @@
             <div class="delivery-item">
               <Dropdown
                   v-model="taskData.delivery_city"
-                  editable
                   :options="delivery_cities"
                   optionLabel="name"
                   placeholder="Оберіть назву міста"
@@ -79,7 +77,6 @@
             <div class="delivery-item">
               <Dropdown
                   v-model="taskData.delivery_res"
-                  editable
                   :options="delivery_res"
                   optionLabel="name"
                   placeholder="Оберіть номер відділення"

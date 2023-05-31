@@ -122,10 +122,9 @@ export default {
             this.isVisible = true
         },
         updateListItem(updatedItem) {
-            console.log('updatedItem', updatedItem)
             const index = this.tableData.findIndex(task => task.order_id === updatedItem.order_id);
             if (index !== -1) {
-                this.tableData[index] = updatedItem;
+                this.tableData[index] = { ...updatedItem, books: updatedItem.books.map(item => item.book_id).join(', ')}
             }
         },
         async deleteItem(data) {
