@@ -3,18 +3,7 @@
     <div style="padding: 20px">
       <div class="filter-block">
         <div class="filter-block-title">
-          <p>Фільтри</p>
-        </div>
-
-        <div class="flex align-items-center filter-item">
-          <Checkbox @change="handleFiltersData( 'special_price' , discount)" v-model="discount" inputId="ingredient1"
-                    name="discount" value="true"/>
-          <label for="ingredient1" class="ml-2"> Знижка </label>
-        </div>
-        <div class="flex align-items-center filter-item">
-          <Checkbox @change="handleFiltersData( 'is_top_sale' ,sales_hits)" v-model="sales_hits" inputId="ingredient1"
-                    name="sales_hits" value="true"/>
-          <label for="ingredient2" class="ml-2"> Хіти продажу </label>
+          <p class="main-title">Фільтри</p>
         </div>
 
       </div>
@@ -166,6 +155,11 @@ export default defineComponent({
 <style scoped>
 
 
+.main-title{
+    font-size: 18px;
+    margin-bottom: 35px;
+    font-weight: 700;
+}
 .max-price__text, .min-price__text{
     margin-right: 5px;
     font-family: "Mabry Pro", sans-serif;
@@ -238,13 +232,9 @@ export default defineComponent({
     color: #626B77;
     font-family: "Mabry Pro", sans-serif;
     font-weight: 400;
-    font-size: 15px;
+    font-size: 13px;
     line-height: 120%;
     font-style: normal;
-}
-
-.search_publisher {
-  border-radius: 10px;
 }
 
 :deep(.p-inputnumber-input) {

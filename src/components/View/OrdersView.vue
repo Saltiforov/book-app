@@ -2,14 +2,12 @@
     <div class="report-view">
 
         <div class="report-search">
-            <span style="color: white; margin-right: 20px">Пошук</span>
             <span class="p-input-icon-right"
                   style="margin-right: 20px"
             >
                     <i class="pi pi-search"/>
                     <InputText @input="handleFiltersData()" placeholder="Пошук" v-model="ordersText"/>
                 </span>
-            <Button icon="pi pi-search" aria-label="Search"/>
         </div>
         <OrdersModal
                 :is-visible="isVisible"
@@ -89,7 +87,7 @@ export default {
                     code: 'order_id'
                 },
                 {
-                    header: 'Ідентифікатор користувача',
+                    header: 'Видавець',
                     sortable: true,
                     style: 'width: 8rem',
                     code: 'user_id'

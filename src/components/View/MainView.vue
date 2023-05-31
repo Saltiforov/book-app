@@ -9,12 +9,6 @@
                 <InputText type="text" v-model="searchText" placeholder="Знайти книгу"/>
             </div>
 
-            <div class="header-search__btn">
-                <Button
-                    label="Пошук"
-
-                />
-            </div>
 
             <div class="basket-link">
                 <img  class="basket-link__image" src="./../View/img/basket-img.svg" alt="">
@@ -216,11 +210,6 @@ export default defineComponent({
     padding: 10px 27px;
     background: #CE4CE4;
     border: 1px solid #C5C5DB;
-    border-radius: 6px;
-}
-
-:deep(.p-button:enabled:hover ) {
-    background: #CE4CE4;
     border-radius: 6px;
 }
 

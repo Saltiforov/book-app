@@ -4,6 +4,8 @@ import router from './router'
 import Vuex from './store'
 import PrimeVue from 'primevue/config';
 import './assets/styles/reset.css';
+import './assets/styles/fonts.css'
+import '@fortawesome/fontawesome-free/css/all.css';
 
 
 import 'primevue/resources/themes/saga-blue/theme.css'

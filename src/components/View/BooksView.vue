@@ -60,7 +60,7 @@ export default {
             tableConfig: [
                 {
                     code: 'title',
-                    header: 'Назва',
+                    header: 'Назва книги',
                     sortable: true,
                     style: 'width: 8rem'
                 },
@@ -238,10 +238,6 @@ export default {
     border-radius: 10px;
 }
 
-:deep(.p-button:enabled:hover ) {
-    background: #CE4CE4;
-    border-radius: 10px;
-}
 
 .books-dropdown {
     margin-right: 30px;

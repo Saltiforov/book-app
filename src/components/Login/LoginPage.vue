@@ -200,11 +200,7 @@ export default {
     border-radius: 10px;
     border: 1px solid white;
 }
-:deep(.p-button:enabled:hover){
-    background: #CE4CE4;
-    border-radius: 10px;
-    border: 1px solid white;
-}
+
 .no-account {
     margin-top: 20px;
 }

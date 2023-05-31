@@ -166,7 +166,7 @@ export default {
       formData.append('title', this.title);
       formData.append('price', this.price);
       formData.append('publication_date', this.formatDate(this.publication_date));
-      formData.append('format_type', this.format_type.name);
+      formData.append('format_type', this.format_type.code);
       formData.append('language_type', JSON.stringify(this.language_type));
       formData.append('user_id', this.publisher_id.code);
       formData.append('sup_id', this.sup_id.code);
@@ -231,7 +231,7 @@ export default {
 
 .modal-author__item {
   width: 100%;
-  padding: 15px 0px;
+  padding: 20px 0px;
 }
 
 #author {
@@ -289,7 +289,7 @@ export default {
     background: white;
     box-shadow: 0 8px 46px rgba(0, 0, 0, 0.25);
     border-radius: 19px;
-    margin: 20px auto;
+    margin: 40px auto;
     display: flex;
     flex-direction: column;
     text-align: center;
@@ -299,17 +299,17 @@ export default {
       width: 425px;
       display: flex;
       justify-content: space-between;
-      margin: 0 auto 5px;
+      margin: 0 auto 35px;
     }
 
     &__title {
-
       font-style: normal;
       font-weight: 600;
       font-size: 24px;
       line-height: 33px;
       color: black;
-      padding-bottom: 10px;
+      padding-top: 15px;
+      padding-bottom: 30px;
     }
 
     &__inputs {

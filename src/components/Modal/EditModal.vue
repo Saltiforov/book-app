@@ -162,7 +162,7 @@ export default {
                 this.taskData = {
                     ...newVal,
                     language_type: this.languages.find(lang => lang['code'] === newVal.language_type),
-                    format_type: this.bookType.find(book => book['name'] === newVal.format_type),
+                    format_type: this.bookType.find(book => book['code'] === newVal.format_type),
                     user_id: this.usersList && this.usersList.find(item => item.code === newVal.user_id),
                     sup_id: this.supIdList.find(supp => supp['code'] === newVal.sup_id)
                 };

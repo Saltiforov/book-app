@@ -32,10 +32,13 @@
                     </div>
 
                     <div v-if="book.available" class="available--book">
-                        <p class="status-text"> В наявності</p>
-                        <p  class="status-text" >Доставка по Києву кур'єром завтра</p>
+                        <div class="available--book__delivery">
+                            <img class="truck-icon" src="@/assets/truck-icon.png" alt="">
+                            <p class="status-text ">В наявності</p>
+                        </div>
+                        <p class="status-text" >Доставка по Києву кур'єром завтра</p>
                     </div>
-                    <p v-else class="unavailability">Не в наявності</p>
+                    <p v-else class="unavailability">Немає в наявності</p>
                 </div>
 
                 <div class="card-buttons">
@@ -67,6 +70,7 @@
 import {defineComponent} from 'vue'
 import { mapMutations } from "vuex";
 import Button from 'primevue/button';
+
 
 
 export default defineComponent({
@@ -112,11 +116,18 @@ export default defineComponent({
 
 <style scoped>
 
+
+
+.truck-icon{
+    width: 21px;
+    height: 20px;
+    display: inline;
+    margin-right: 10px;
+}
 .status-text{
-    font-size: 14px;
+    font-size: 13px;
     line-height: 15px;
-    color: #4A934A;
-    margin-bottom: 5px;
+    color: #58b658;
 }
 .bookCard{
     height: 370px;
@@ -153,6 +164,7 @@ export default defineComponent({
     border-radius: 5px;
     padding: 2px;
     left: 10px;
+    font-size: 12px;
 }
 
 .book-description{
@@ -180,30 +192,44 @@ export default defineComponent({
 .book-name {
     color: black;
     margin-bottom: 5px;
+    font-size: 14px;
+    font-weight: bold;
 }
 
 .author{
     color: #969292;
+    font-size: 13px;
     margin-bottom: 5px;
 }
 
 .book-price{
     margin-bottom: 5px;
+    font-size: 14px;
+    font-weight: bold;
 }
 
-.availability{
+.available--book{
     color: green;
     margin-bottom: 5px;
+
+}
+
+.available--book__delivery{
+    display: flex;
+    align-items: center
 }
 
 .unavailability{
-    color: red;
+    color: #78818D;
     margin-bottom: 5px;
+    font-weight: 400;
+    font-size: 15px;
 }
 
 .card-buttons{
     display: flex;
     justify-content: space-around;
+    align-items: center;
 }
 
 .add-to-card-btn{
@@ -228,7 +254,7 @@ export default defineComponent({
     border: none;
     background: mediumpurple;
     color: white;
-    padding: 12px;
+    padding: 10px;
     cursor: pointer;
     border-radius: 10px
 }

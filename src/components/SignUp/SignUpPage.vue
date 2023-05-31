@@ -143,12 +143,11 @@ export default {
 
 .VSignUp-wrapper {
   width: 632px;
-  height: 738px;
-  background: rgba(217, 217, 217, 0.81);
+  background: rgba(217, 217, 217, 0.91);
   box-shadow: 0px 14px 13px rgba(0, 0, 0, 0.11);
   border-radius: 32px;
   padding: 10px;
-  margin: 100px auto;
+  margin: 30px auto;
 }
 
 .VSignUp__container {
@@ -159,16 +158,17 @@ export default {
 }
 
 .title {
+    font-family: 'Open Sans';
   font-style: normal;
   font-weight: 600;
   font-size: 24px;
   line-height: 33px;
   text-align: center;
-  padding: 20px;
+    padding: 10px 0px;
 }
 
 .VSignUp__container-form {
-  padding: 10px;
+  padding: 10px 10px 30px;
   margin: 0 auto;
 }
 
@@ -181,16 +181,17 @@ export default {
 }
 
 .form-item {
-  margin-bottom: 40px;
+  margin-bottom: 30px;
 }
 
 .agree-text {
   font-style: normal;
   font-weight: 400;
   font-size: 14px;
-  margin-top: 5px;
+  margin-top: 15px;
   line-height: 14px;
   color: #757575;
+    letter-spacing: 0.5px
 }
 
 :deep(.p-float-label label) {
@@ -203,7 +204,7 @@ export default {
 }
 
 :deep(.p-float-label > label) {
-  color: black;
+    font-size: 14px;
 }
 
 :deep(.p-input-icon-right > svg) {
@@ -225,10 +226,6 @@ export default {
   padding: 10px 40px;
 }
 
-:deep(.p-button:enabled:hover) {
-  background: #CE4CE4;
-  border-radius: 10px;
-}
 
 .no-account {
   padding: 10px;
