@@ -187,7 +187,7 @@ export default {
         this.tableData = this.tableData.map(data => {
             return {
                 ...data,
-                publication_date: moment(data.publication_date).subtract(10, 'days').calendar()
+                publication_date: moment(data.publication_date).format('YYYY-MM-DD')
             }
         })
         this.languages = await this.apiService.getLanguages()

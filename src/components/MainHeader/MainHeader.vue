@@ -84,7 +84,7 @@ export default defineComponent({
     font-size: 20px;
     line-height: 33px;
 }
-.active-link{
+.router-link-active {
     color: black !important;
 }
 </style>

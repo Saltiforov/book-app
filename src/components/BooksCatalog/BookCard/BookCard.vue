@@ -24,7 +24,7 @@
                     </div>
 
                     <div class="author">
-                        <p>Ліна Костенко</p>
+                        <p>{{ this.book.author }}</p>
                     </div>
 
                     <div class="book-price">
@@ -43,13 +43,18 @@
                         <Button
                             label="До кошика"
                             @click="addToBasket(book)"
+                            :disabled="!this.book.available"
                             class="add-to-card-btn"
                         />
                     </div>
                     <div class="buy-book">
-                        <button class="buy-book-btn"
-                        @click="redirectToBasket(book)"
-                        >Купити</button>
+                        <Button
+                            class="buy-book-btn"
+                            :disabled="!this.book.available"
+                            @click="redirectToBasket(book)"
+                        >
+                            Купити
+                        </Button>
                     </div>
                 </div>
             </div>

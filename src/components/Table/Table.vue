@@ -85,7 +85,17 @@ export default defineComponent({
         },
     },
     computed: {
-
+        editedTableData() {
+            return this.tableData.map(item => {
+                if (item.book_id && item.user_id) {
+                    return {
+                        ...item,
+                        book_id: this.extractSegment(item.book_id),
+                        user_id: this.extractSegment(item.user_id),
+                    }
+                }
+            })
+        }
     }
 
 })
