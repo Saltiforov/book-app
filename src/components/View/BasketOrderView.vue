@@ -64,7 +64,9 @@ export default {
 
 
 <style scoped>
-
+:deep(.order-textarea) {
+  max-width: 860px !important;
+}
 :deep(.p-message .p-message-wrapper){
     padding: 0.5rem 0.5rem;
 }
