@@ -1,8 +1,8 @@
 <template>
     <div class="basket-card">
-        <a style="margin-right: 15px" href=""><img class="basket-img"
-                                                   src="https://static.yakaboo.ua/media/cloudflare/product/webp/600x840/i/m/img_0239_6.jpg"
-                                                   alt=""></a>
+
+      <a style="margin-right: 15px" href="">      <img class="basket-img" :src="getBase64Image(book.image)" alt="Book Image">
+      </a>
         <div class="basket-card-info">
             <p class="basket-card__name-book">{{ book.name }}</p>
             <p class="basket-card__author-name">{{ book.author }}</p>
@@ -30,7 +30,12 @@ export default {
         }
     },
     methods: {
-
+      getBase64Image(image) {
+        if (image) {
+          return `data:image/jpeg;base64, ${image}`;
+        }
+        return null;
+      }
     },
     computed: {
         extractSubstringId() {

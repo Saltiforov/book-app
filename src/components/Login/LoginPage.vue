@@ -199,6 +199,7 @@ export default {
 }
 
 .login__btn{
+    display: none;
     padding: 10px 50px;
     background: #CE4CE4;
     border-radius: 10px;

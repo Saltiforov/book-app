@@ -183,7 +183,7 @@ export default defineComponent({
 }
 
 .login-profile {
-    display: flex;
+    display: none;
     align-items: center;
 }
 
