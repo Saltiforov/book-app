@@ -37,7 +37,6 @@ const routes = [
                 path: 'basket',
                 name: BasketView,
                 component: BasketView,
-                meta: {requiresAuth: true}
 
             },
         ]
