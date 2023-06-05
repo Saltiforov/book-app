@@ -79,6 +79,7 @@ export default {
           password: this.formData.password,
         }).then((res) => {
           localStorage.setItem('user', JSON.stringify(res.data.user));
+          localStorage.setItem('token', JSON.stringify(res.data.token));
           this.$router.push('/wrapper-links/books')
         })
       }

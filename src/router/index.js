@@ -86,12 +86,9 @@ const router = createRouter({
 router.beforeEach((to, from, next) => {
     const requiresAuth = to.matched.some((record) => record.meta.requiresAuth);
     const isAuthenticated = localStorage.getItem('token');
-    const isAdmin = JSON.parse(localStorage.getItem('user'))?.role === 'admin' || false;
 
     if (requiresAuth && !isAuthenticated) {
         next('/login');
-    } else if ((to.name === 'reports' || to.name === 'workers') && !isAdmin) {
-        next('/'); // Redirect to home if the user doesn't have the "admin" role
     } else {
         next();
     }
