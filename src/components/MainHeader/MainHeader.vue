@@ -21,7 +21,7 @@
 
         <div class="profile">
             <img src="../MainHeader/img/profile-img.png" alt="" class="profile-img">
-            <p class="profile-name">Бланка</p>
+            <p class="profile-name">Ruslana_vanda</p>
             <span></span>
         </div>
 
