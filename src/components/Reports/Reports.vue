@@ -120,7 +120,6 @@ export default {
       this.reports = await this.apiService.getSalesReports();
       this.supplierReports = await this.apiService.getSupplierReports();
 
-      // Sales report chart configuration
       const categories = this.reports.map((report) => report.month);
       const data = this.reports.map((report) => report.totalPrice);
 
@@ -130,7 +129,6 @@ export default {
       const chart = new ApexCharts(this.$refs.chart, this.chartOptions);
       chart.render();
 
-      // Supplier report chart configuration
       const supplierCategories = this.supplierReports.map((supplier) => supplier.supplierName);
       const supplierData = this.supplierReports.map((supplier) => supplier.bookCount);
 

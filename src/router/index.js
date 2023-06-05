@@ -31,12 +31,14 @@ const routes = [
             {
                 path: '',
                 name: BookGoods,
-                component: BookGoods
+                component: BookGoods,
             },
             {
                 path: 'basket',
                 name: BasketView,
-                component: BasketView
+                component: BasketView,
+                meta: {requiresAuth: true}
+
             },
         ]
     },
@@ -44,21 +46,28 @@ const routes = [
         path: '/wrapper-links/',
         name: WrapperLinks,
         component: WrapperLinks,
+        meta: {requiresAuth: true},
         children: [
             {
                 path: 'books',
                 name: BooksView,
-                component: BooksView
+                component: BooksView,
+                meta: {requiresAuth: true}
+
             },
             {
                 path: 'orders',
                 name: OrdersView,
-                component: OrdersView
+                component: OrdersView,
+                meta: {requiresAuth: true}
+
             },
             {
                 path: 'reports',
                 name: ReportsView,
-                component: ReportsView
+                component: ReportsView,
+                meta: {requiresAuth: true}
+
             },
         ]
     },
@@ -76,13 +85,16 @@ const router = createRouter({
 })
 
 router.beforeEach((to, from, next) => {
-    const requiresAuth = to.matched.some((record) => record.meta.requiresAuth)
-    const isAuthenticated = localStorage.getItem('token')
+    const requiresAuth = to.matched.some((record) => record.meta.requiresAuth);
+    const isAuthenticated = localStorage.getItem('token');
+    const isAdmin = JSON.parse(localStorage.getItem('user'))?.role === 'admin' || false;
 
     if (requiresAuth && !isAuthenticated) {
-        next('/login')
+        next('/login');
+    } else if ((to.name === 'reports' || to.name === 'workers') && !isAdmin) {
+        next('/'); // Redirect to home if the user doesn't have the "admin" role
     } else {
-        next()
+        next();
     }
 })
 export default router

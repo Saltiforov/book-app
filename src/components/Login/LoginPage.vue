@@ -77,6 +77,9 @@ export default {
         axios.post('/api/login', {
           user_name: this.formData.userName,
           password: this.formData.password,
+        }).then((res) => {
+          localStorage.setItem('user', JSON.stringify(res.data.user));
+          this.$router.push('/wrapper-links/books')
         })
       }
     },

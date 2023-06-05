@@ -147,7 +147,7 @@ export default {
   box-shadow: 0px 14px 13px rgba(0, 0, 0, 0.11);
   border-radius: 32px;
   padding: 10px;
-  margin: 30px auto;
+  margin: 5px auto;
 }
 
 .VSignUp__container {
@@ -168,7 +168,7 @@ export default {
 }
 
 .VSignUp__container-form {
-  padding: 10px 10px 30px;
+  padding: 10px 10px 15px;
   margin: 0 auto;
 }
 
@@ -181,13 +181,13 @@ export default {
 }
 
 .form-item {
-  margin-bottom: 30px;
+  margin-bottom: 25px;
 }
 
 .agree-text {
   font-style: normal;
   font-weight: 400;
-  font-size: 14px;
+  font-size: 10px;
   margin-top: 15px;
   line-height: 14px;
   color: #757575;
@@ -212,7 +212,7 @@ export default {
 }
 
 .signup-btn {
-  padding: 20px;
+  padding: 10px;
 }
 
 :deep(.no-account a:hover) {
