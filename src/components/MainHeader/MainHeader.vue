@@ -21,7 +21,7 @@
 
         <div class="profile">
             <img src="../MainHeader/img/profile-img.png" alt="" class="profile-img">
-            <p class="profile-name">Ruslana_vanda</p>
+            <p class="profile-name">{{ getUserName }}</p>
             <span></span>
         </div>
 
@@ -34,7 +34,12 @@ import { RouterLink } from "vue-router";
 
 export default defineComponent({
     name: "MainHeader",
-    components: { RouterLink }
+    components: { RouterLink },
+    computed: {
+      getUserName() {
+        return JSON.parse(localStorage.getItem('user'))?.user_name;
+      }
+    },
 })
 </script>
 
